@@ -1,4 +1,4 @@
-package project;
+package ch.bfh.ti.soed.hs16.srs.green;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
