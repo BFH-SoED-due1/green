@@ -40,8 +40,28 @@
 
     <developers>
         <developer>
-            <id>xyzow1</id><!-- provide BFH Kürzel -->
-            <name>... ...</name><!-- provide first and last name -->
+            <id>galam1</id><!-- provide BFH Kürzel -->
+            <name>M Galatioto</name><!-- provide first and last name -->
+            <email>...@students.bfh.ch</email><!-- provide e-mail address (optional) -->
+            <organization>Berner Fachhochschule / TI</organization>
+            <organizationUrl>http://www.ti.bfh.ch/</organizationUrl>
+            <roles>
+                <role>software developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>schos9</id><!-- provide BFH Kürzel -->
+            <name>S Schoenmann</name><!-- provide first and last name -->
+            <email>...@students.bfh.ch</email><!-- provide e-mail address (optional) -->
+            <organization>Berner Fachhochschule / TI</organization>
+            <organizationUrl>http://www.ti.bfh.ch/</organizationUrl>
+            <roles>
+                <role>software developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>wuthv1</id><!-- provide BFH Kürzel -->
+            <name>V Wuethrich</name><!-- provide first and last name -->
             <email>...@students.bfh.ch</email><!-- provide e-mail address (optional) -->
             <organization>Berner Fachhochschule / TI</organization>
             <organizationUrl>http://www.ti.bfh.ch/</organizationUrl>
