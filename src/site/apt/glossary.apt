@@ -21,6 +21,21 @@ by the development team.
 	
 	[Sprint]		Teilresultat zur Vervollständigung des Endprodukts.
 	
-	[Stakeholder]	Teilhabende und Interessengruppen an der Entwicklung
+	[Stakeholder (SH)]	Teilhabende und Interessengruppen an der Entwicklung
 					der Software. Stakeholders des Reservierungssystems.
+					
+	[SH Entwicklungsteam]	Hauptverantwortung für die Programmierung des Reservierungssystems.
+						Präsentiert die Arbeit dem Product Owner. Selbstständig für die Planung und 
+						die Termineinhaltungen. (V. Wüthrich, S. Schönmann, M. Galatioto)
+
+	[SH Scrum Master]	Unterstützt das Entwicklungsteam und macht Sie auf Termine aufmerksam. 
+						Kontaktperson des Kunden, in unserem Falle, der Dozent. 
+						Organisiert unsere Scrum-Sitzungen. (M. Galatioto)
+	
+	[SH Product Owner]	Repräsentiert den Kunden. Stellt die Anforderungen auf, die unser Produkt einhalten sollte. 
+						Die Fortschritte werden von unserem Scrum Master an ihn vermittelt.
+						Er will die Interessen der Stakeholder zufriedenstellen. (E. Dubuis)
+	
+	[SH Product Owner]	Nimmt an jeglichen Sitzungen teil, welche das Endprodukt betreffen.
+						Nutzt und gibt dem Scrum Master Rückmeldungen über das Reservationssystems. (User, Superuser)
 
