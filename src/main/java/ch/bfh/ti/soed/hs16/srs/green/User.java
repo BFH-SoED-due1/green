@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
+ *
+ * Project Smart Reservation System.
+ *
+ * Distributable under GPL license. See terms of license at gnu.org.
+ */
 package ch.bfh.ti.soed.hs16.srs.green;
 
 import java.util.Collections;
@@ -19,20 +26,24 @@ public class User {
 
 	}
 
-	public String getUserName() {
-		return userName;
+	public void addReservationsMadeByUser(Reservation reservation) {
+		bookedReservation.add(reservation);
+	}
+
+	public String getAhv() {
+		return ahv;
 	}
 
 	public String getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public Set<Reservation> getReservations() {
+		return Collections.unmodifiableSet(bookedReservation);
 	}
 
-	public String getAhv() {
-		return ahv;
+	public String getUserName() {
+		return userName;
 	}
 
 	public void makeReservation(Date date, Room room) throws Exception {
@@ -40,12 +51,8 @@ public class User {
 		bookedReservation.add(reserv);
 	}
 
-	public Set<Reservation> getReservations() {
-		return Collections.unmodifiableSet(bookedReservation);
-	}
-
-	public void addReservationsMadeByUser(Reservation reservation) {
-		bookedReservation.add(reservation);
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 }

@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
+ *
+ * Project Smart Reservation System.
+ *
+ * Distributable under GPL license. See terms of license at gnu.org.
+ */
+
 package ch.bfh.ti.soed.hs16.srs.green;
 
 import java.util.Date;
@@ -49,20 +57,12 @@ public class Reservation {
 		return date;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public boolean isPeriodic() {
-		return periodic;
-	}
-
-	public void setPeriodic(boolean periodic) {
-		this.periodic = periodic;
-	}
-
 	public Room getRoom() {
 		return room;
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	public boolean isAvailable(Room room) {
@@ -74,6 +74,14 @@ public class Reservation {
 				return false;
 		return true;
 
+	}
+
+	public boolean isPeriodic() {
+		return periodic;
+	}
+
+	public void setPeriodic(boolean periodic) {
+		this.periodic = periodic;
 	}
 
 }

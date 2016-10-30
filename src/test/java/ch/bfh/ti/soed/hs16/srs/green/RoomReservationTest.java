@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
+ *
+ * Project Smart Reservation System.
+ *
+ * Distributable under GPL license. See terms of license at gnu.org.
+ */
 package ch.bfh.ti.soed.hs16.srs.green;
 
 import static org.junit.Assert.assertEquals;
@@ -14,18 +21,13 @@ import org.junit.Test;
 public class RoomReservationTest {
 
 	@Test
-	public void testUserReservation() {
-		User sven = new User("Sven", "123.123.122");
-		Set<Reservation> reservSven = sven.getReservations();
-		assertNotNull(reservSven);
-
-	}
-
-	@Test
-	public void testGetUsername() {
-		User sven = new User("Sven", "123.123.122");
-		String user = sven.getUserName();
-		assertEquals("Sven", user);
+	public void testAddRoomToReservation() throws Exception {
+		User u1 = new User("Sven", "123.123.122");
+		Room r1 = new Room(13, 11, null);
+		Date d1 = new GregorianCalendar(2016, 10, 18).getTime();
+		u1.makeReservation(d1, r1);
+		Set<Reservation> reservation = r1.getReservations();
+		assertNotNull(reservation);
 	}
 
 	@Test
@@ -37,19 +39,16 @@ public class RoomReservationTest {
 	}
 
 	@Test
-	public void testNewRoom() {
-		Room r1 = new Room(13, 11, null);
-		assertNotNull(r1);
+	public void testGetUsername() {
+		User sven = new User("Sven", "123.123.122");
+		String user = sven.getUserName();
+		assertEquals("Sven", user);
 	}
 
 	@Test
-	public void testAddRoomToReservation() throws Exception {
-		User u1 = new User("Sven", "123.123.122");
+	public void testNewRoom() {
 		Room r1 = new Room(13, 11, null);
-		Date d1 = new GregorianCalendar(2016, 10, 18).getTime();
-		u1.makeReservation(d1, r1);
-		Set<Reservation> reservation = r1.getReservations();
-		assertNotNull(reservation);
+		assertNotNull(r1);
 	}
 
 	@Test(expected = Exception.class)
@@ -78,6 +77,14 @@ public class RoomReservationTest {
 		Room r1 = new Room(10, 100, null);
 		u1.makeReservation(new Date(), r1);
 		assertEquals(u1.getReservations().size(), r1.getReservations().size());
+
+	}
+
+	@Test
+	public void testUserReservation() {
+		User sven = new User("Sven", "123.123.122");
+		Set<Reservation> reservSven = sven.getReservations();
+		assertNotNull(reservSven);
 
 	}
 
