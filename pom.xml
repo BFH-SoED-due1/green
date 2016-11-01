@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>ch.bfh.ti.soed.hs16</groupId>
-	<artifactId>srs-blue</artifactId>
+	<artifactId>srs-green</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>srs-blue</name>
+	<name>srs-green</name>
 	<organization>
 		<name>BFH</name>
 		<url>http://www.ti.bfh.ch</url>
@@ -32,9 +32,9 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:git@github.com:BFH-SoED-due1/blue.git</connection>
-		<developerConnection>scm:git:git@github.com:BFH-SoED-due1/blue.git</developerConnection>
-		<url>https://github.com/BFH-SoED-due1/blue.git</url>
+		<connection>scm:git:git@github.com:BFH-SoED-due1/green.git</connection>
+		<developerConnection>scm:git:git@github.com:BFH-SoED-due1/green.git</developerConnection>
+		<url>https://github.com/BFH-SoED-due1/green.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
