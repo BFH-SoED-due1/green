@@ -19,7 +19,7 @@ public class Reservation {
 	private Room room;
 	private final User user;
 
-	Reservation(Date date, /* Time time */ Room room, User user) throws Exception {
+	public Reservation(Date date, /* Time time */ Room room, User user) throws Exception {
 
 		if (user == null)
 			throw new Exception("Cannot make a Reservation, User must be needed");
