@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
- *
- * Project Smart Reservation System.
- *
- * Distributable under GPL license. See terms of license at gnu.org.
- */
 package ch.bfh.ti.soed.hs16.srs.green;
 
 import static org.junit.Assert.assertEquals;
@@ -18,43 +11,61 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import ch.bfh.ti.soed.hs16.srs.green.SystemAdmin.RoomManager;
+import ch.bfh.ti.soed.hs16.srs.green.SystemAdmin.RoomManager.Room;
+
+
 public class RoomReservationTest {
 
 	@Test
-	public void testAddRoomToReservation() throws Exception {
-		User u1 = new User("Sven", "123.123.122");
-		Room r1 = new Room(13, 11, null);
-		Date d1 = new GregorianCalendar(2016, 10, 18).getTime();
-		u1.makeReservation(d1, r1);
-		Set<Reservation> reservation = r1.getReservations();
-		assertNotNull(reservation);
+	public void testUserReservation() {
+		Customer sven = new Customer("Sven", "123.123.122");
+		Set<Reservation> reservSven = sven.getReservations();
+		assertNotNull(reservSven);
+
+	}
+
+	@Test
+	public void testGetUsername() {
+		Customer sven = new Customer("Sven", "123.123.122");
+		String user = sven.getUserName();
+		assertEquals("Sven", user);
 	}
 
 	@Test
 	public void testAHVNumber() {
-		User sven = new User("Sven", "123.123.122");
+		Customer sven = new Customer("Sven", "123.123.122");
 		String ahv = sven.getAhv();
 		assertEquals("123.123.122", ahv);
 
 	}
 
 	@Test
-	public void testGetUsername() {
-		User sven = new User("Sven", "123.123.122");
-		String user = sven.getUserName();
-		assertEquals("Sven", user);
+	public void testNewRoom() {
+		SystemAdmin sa = new SystemAdmin("svenDrBoss", "666666");
+		RoomManager marcoDubu = sa.createResourceManager("marcoDrDubu", "000000");
+		marcoDubu.createRoom(10, 10, null);
+		assertEquals(marcoDubu.lookupRooms().size(), SystemAdmin.RoomManager.Room.getRooms().size());
 	}
 
 	@Test
-	public void testNewRoom() {
-		Room r1 = new Room(13, 11, null);
-		assertNotNull(r1);
+	public void testAddRoomToReservation() throws Exception {
+		SystemAdmin sa = new SystemAdmin("svenDrBoss", "666666");
+		RoomManager marcoDubu = sa.createResourceManager("marcoDrDubu", "000000");
+		Room r1 = marcoDubu.createRoom(10, 10, null);
+		Customer u1 = new Customer("Sven", "123.123.122");
+		Date d1 = new GregorianCalendar(2016, 10, 18).getTime();
+		u1.makeReservation(d1, r1);
+		Set<Reservation> reservation = r1.getReservations();
+		assertNotNull(reservation);
 	}
 
 	@Test(expected = Exception.class)
 	public void testReserveRoomAtTheSameTime() throws Exception {
-		User u1 = new User("Sven", "123.123.122");
-		Room r1 = new Room(13, 11, null);
+		Customer u1 = new Customer("Sven", "123.123.122");
+		SystemAdmin sa = new SystemAdmin("svenDrBoss", "666666");
+		RoomManager marcoDubu = sa.createResourceManager("marcoDrDubu", "000000");
+		Room r1 = marcoDubu.createRoom(10, 10, null);
 		Date d1 = new GregorianCalendar(2016, 10, 18).getTime();
 		Date d2 = new GregorianCalendar(2016, 10, 18).getTime();
 		u1.makeReservation(d1, r1);
@@ -64,27 +75,43 @@ public class RoomReservationTest {
 
 	@Test
 	public void testRoomNumber() throws Exception {
-		User u1 = new User("sven", "23.433.2");
-		u1.makeReservation(new Date(), new Room(9, 100, null));
+		Customer u1 = new Customer("sven", "23.433.2");
+		SystemAdmin sa = new SystemAdmin("svenDrBoss", "666666");
+		RoomManager marcoDubu = sa.createResourceManager("marcoDrDubu", "000000");
+		Room r1 = marcoDubu.createRoom(10, 10, null);
+		u1.makeReservation(new Date(), r1);
 		Set<Reservation> reservations = u1.getReservations();
 		List<Reservation> listOfReservations = new ArrayList<>(reservations);
-		assertEquals(listOfReservations.get(0).getRoom().getRoomNumber(), 9);
+		assertEquals(listOfReservations.get(0).getRoom().getRoomNumber(), 10);
 	}
 
 	@Test
 	public void testSizeOfReservationUserRoom() throws Exception {
-		User u1 = new User("Sven", "123.12.333");
-		Room r1 = new Room(10, 100, null);
+		Customer u1 = new Customer("Sven", "123.12.333");
+		SystemAdmin sa = new SystemAdmin("svenDrBoss", "666666");
+		RoomManager marcoDubu = sa.createResourceManager("marcoDrDubu", "000000");
+		Room r1 = marcoDubu.createRoom(10, 10, null);
 		u1.makeReservation(new Date(), r1);
 		assertEquals(u1.getReservations().size(), r1.getReservations().size());
 
 	}
 
 	@Test
-	public void testUserReservation() {
-		User sven = new User("Sven", "123.123.122");
-		Set<Reservation> reservSven = sven.getReservations();
-		assertNotNull(reservSven);
+	public void testRoomManager() {
+
+		SystemAdmin sa = new SystemAdmin("AdminSvenBoss", "1234567");
+		RoomManager rm = sa.createResourceManager("MarcoDubu", "445664");
+		assertEquals(rm.getUserName(), "MarcoDubu");
+
+	}
+
+	@Test
+	public void testSystemAdmin() {
+		SystemAdmin sa = new SystemAdmin("AdminSvenBoss", "1234567");
+		RoomManager rm = sa.createResourceManager("MarcoDubu", "445664");
+		assertEquals(SystemAdmin.getRoomManagers().size(), 7);
+		sa.deleteResourceManager(rm);
+		assertEquals(SystemAdmin.getRoomManagers().size(), 6);
 
 	}
 

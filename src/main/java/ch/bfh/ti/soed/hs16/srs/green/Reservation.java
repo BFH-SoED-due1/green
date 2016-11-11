@@ -1,15 +1,13 @@
-/*
- * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
- *
- * Project Smart Reservation System.
- *
- * Distributable under GPL license. See terms of license at gnu.org.
- */
-
 package ch.bfh.ti.soed.hs16.srs.green;
 
 import java.util.Date;
 import java.util.Set;
+
+import ch.bfh.ti.soed.hs16.srs.green.SystemAdmin.RoomManager.Room;
+
+
+
+
 
 public class Reservation {
 
@@ -17,9 +15,9 @@ public class Reservation {
 	// private Time time;
 	private boolean periodic;
 	private Room room;
-	private final User user;
+	private final Customer user;
 
-	public Reservation(Date date, /* Time time */ Room room, User user) throws Exception {
+	Reservation(Date date, /* Time time */ Room room, Customer user) throws Exception {
 
 		if (user == null)
 			throw new Exception("Cannot make a Reservation, User must be needed");
@@ -57,12 +55,20 @@ public class Reservation {
 		return date;
 	}
 
-	public Room getRoom() {
-		return room;
+	public Customer getUser() {
+		return user;
 	}
 
-	public User getUser() {
-		return user;
+	public boolean isPeriodic() {
+		return periodic;
+	}
+
+	public void setPeriodic(boolean periodic) {
+		this.periodic = periodic;
+	}
+
+	public Room getRoom() {
+		return room;
 	}
 
 	public boolean isAvailable(Room room) {
@@ -74,14 +80,6 @@ public class Reservation {
 				return false;
 		return true;
 
-	}
-
-	public boolean isPeriodic() {
-		return periodic;
-	}
-
-	public void setPeriodic(boolean periodic) {
-		this.periodic = periodic;
 	}
 
 }
