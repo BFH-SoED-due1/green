@@ -5,7 +5,7 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.soed.hs16.srs.green;
+package ch.bfh.ti.soed.hs16.srs.green.view;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -30,6 +30,11 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 public class MyUI extends UI {
 
+	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+	@VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+	public static class MyUIServlet extends VaadinServlet {
+	}
+
 	@Override
 	protected void init(VaadinRequest vaadinRequest) {
 		final VerticalLayout layout = new VerticalLayout();
@@ -48,10 +53,5 @@ public class MyUI extends UI {
 		layout.setSpacing(true);
 
 		setContent(layout);
-	}
-
-	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-	@VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
-	public static class MyUIServlet extends VaadinServlet {
 	}
 }
