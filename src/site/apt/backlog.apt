@@ -1,0 +1,37 @@
+    ----------
+    Backlog
+    ----------
+    wthv1
+    ----------
+    November 09, 2016
+
+Backlog (BL)
+
+  Dieses Dokument beschreibt den Product/Sprint Backlog von Team Grün.
+  Die Aufwandschätzung der einzelnen Tasks oder Stories wird mit "Story Point"s am ende der Zeile dargestellt.
+  Story Point's sollen nicht die geschätzten Stundenanzahl angeben sondern die "Komplexität" der Aufgabe im Verhältnis zu den anderen.
+  
+  (Ausschnitte aus JIRA - hier wird BL erfasst und verwaltet)
+  Symbolerklärung:
+  
+[images/BLS1.png] Symbole1
+
+
+[images/BLS2.png] Symbole2
+
+
+* 1. Product Backlog
+
+[images/PBL1.png] Product Backlog
+
+* 2. Product Backlog (prioritized) 
+
+[images/PBL2.png] Product Backlog after ordering
+
+* 3. Sprint Backlog (Sprint 2)
+
+[images/SBL.png] Sprint Backlog
+
+* 4. Finished
+
+  Finished tasks.
