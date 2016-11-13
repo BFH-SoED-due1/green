@@ -5,33 +5,21 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-
 package ch.bfh.ti.soed.hs16.srs.green.model;
 
-/**
- *
- * @author Vanessa
- *
- */
 public class Customer {
 
-	private String userName, email, pw;
+	private String name, email, pw;
 	//private ReservationService rs;
 
-	/**
-	 *
-	 * @param userName
-	 * @param email
-	 * @param pw
-	 */
-	public Customer(String userName, String email, String pw) {
-		this.userName = userName;
+	public Customer(String name, String email, String pw) {
+		this.name = name;
 		this.email = email;
 		this.pw = pw;
 	}
 
-	public boolean checkPW(String pw) {
-		return this.pw == pw;
+	public boolean checkPW(String pwToCheck) {
+		return pw == pwToCheck;
 	}
 
 	public String getEmail() {
@@ -39,16 +27,16 @@ public class Customer {
 	}
 
 	public String getName() {
-		return userName;
+		return name;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String userName) {
+		name = userName;
 	}
 
-
 }
+ 
