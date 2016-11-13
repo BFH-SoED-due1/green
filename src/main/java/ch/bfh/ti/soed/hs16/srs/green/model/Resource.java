@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
  *
@@ -5,7 +6,6 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-
 package ch.bfh.ti.soed.hs16.srs.green.model;
 
 import java.rmi.server.UID;
@@ -21,7 +21,6 @@ public class Resource {
 		this.size = size;
 		this.location = location;
 		UID = new UID();
-
 	}
 
 	public String getLocation() {
@@ -52,4 +51,13 @@ public class Resource {
 		this.size = size;
 	}
 
+//	public void add() {
+//		add resource to database
+//	}
+
+//	public void remove() {
+//	remove resource to database and delete object
+//}
+
 }
+
