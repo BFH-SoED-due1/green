@@ -7,11 +7,12 @@
 
 Backlog (BL)
 
-  Dieses Dokument beschreibt den Product/Sprint Backlog von Team Grün.
-  Die Aufwandschätzung der einzelnen Tasks oder Stories wird mit "Story Point"s am ende der Zeile dargestellt.
-  Story Point's sollen nicht die geschätzten Stundenanzahl angeben sondern die "Komplexität" der Aufgabe im Verhältnis zu den anderen.
-  
   (Ausschnitte aus JIRA - hier wird BL erfasst und verwaltet)
+  Dieses Dokument beschreibt den Product/Sprint Backlog von Team Grün.
+  Die Aufwandschätzung der einzelnen Tasks oder Stories wird mit "Story Point"s am Ende der Zeile dargestellt.
+  Story Point's sollen nicht die geschätzten Stundenanzahl angeben sondern die "Komplexität/Aufwand" der Aufgabe im Verhältnis zu den anderen darstellen.
+  
+ 
   Symbolerklärung:
   
 [images/BLS1.png] Symbole1
@@ -32,6 +33,13 @@ Backlog (BL)
 
 [images/SBL.png] Sprint Backlog
 
-* 4. Finished
+* 4. Overview (finished) Tasks of Sprint 2
 
-  Finished tasks.
+[images/finished1.png] Finished Tasks
+
+[images/finished2.png] Finished Tasks
+
+* 5. Sprint Backlog (Sprint 3)
+
+  cooming soon
+
