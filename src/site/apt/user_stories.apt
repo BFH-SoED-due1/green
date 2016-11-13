@@ -15,11 +15,11 @@ roles users have when using the Smart Reservation System (SRS).
   Describe the roles you have identified. I recommend to use a definition
 list:
 
-  [User] Person who books the rooms. An ordinary user of the system.
+  [Customer] Person who books the resources. An ordinary user of the system.
 
-  [Room Manager] Person who enters the rooms that can be booked.
+  [Resource Manager] Person who manages the resources that can be booked.
 
-  [Product Owner] Owner of the system.
+  [System Admin] Admin of the system (and event. Product Owner).
 
 
 * 2. User Stories
@@ -31,25 +31,41 @@ or more criteria which can be used to validate whether the user story is
 correctly implemented.
 
 
-
-*------+---------------+--------------+-------+
-|<<No>>|<<Description>>|<<Success>>|<<Failed>>|
-*------+---------------+--------------+-------+
-|01|As <Room Manager> I want to be able to add a new room to the system, so that users can reserve this room.|The room is added and the users are able to book it.|A message box appears and shows the reason of an error.|
-*--+---------------------------------------------------------+-----------+-----------+
-|02|As <Room Manager> I want to be able to remove a room form the system.|The room is removed and (if there were any reservations for the room, the respective(s) user(s) will be informed.)|A message box appears and shows the reason of an error.|
-*--+---------------------------------------------------------+-----------+-----------+
-|03|As <User> I want to be able to add a new reservation, so that a resource is reserved till the reservation ends.|The object is reserved for the entered time.|A message box appears with the errors.|
-*--+---------------------------------------------------------+-----------+-----------+
-|04|As <User> I want to be able to invite other participants directly (e-mail) for a confirmed reservation.|The participants received a invitation mail.|A message box appears with the errors.|
-*--+---------------------------------------------------------+-----------+-----------+
-|05|As <User> I want to be able to cancel a reservation.|The reservation is canceled. (Other participants are informed.)|A message box appears and shows the reason of an error.|
-*--+---------------------------------------------------------+-----------+-----------+
-|05|As <User> I want to be able to save my reservations in outlook.| A date/appointment is registerd in outlook.|A message box appears and shows the reason of an error.|
-*--+---------------------------------------------------------+-----------+-----------+
-|06|Als <Product Owner> möchte ich den Support leisten können, um sicherzustellen, dass das System einwandfrei funktioniert|
-*--+---------------------------------------------------------+-----------+-----------+
-
+*------+---------------+
+|<<No>>|<<Description>>|
+*------+---------------+
+|01| As <Customer> I want to have a costumer account, so that I can use the smart reservation system.|
+*------+---------------+
+|02| As <Customer> I want to be able to edit my costumer account.|
+*------+---------------+
+|03| As <Customer> I want to be able to reserve a resource in a easy way, so that I can choose the time and maybe the location.|
+*------+---------------+
+|04| As <Customer> I want to be able to see all my reservations – in future and past.|
+*------+---------------+
+|05| As <Customer> I want to be able to manage/edit a future reservations.|
+*------+---------------+
+|06| As <Customer> I want to be able to delete a future reservations.|
+*------+---------------+
+|07| As <Resource Manager> I want to be able to create the resources.|
+*------+---------------+
+|08| As <Resource Manager> I want to be able to edit the resources.|
+*------+---------------+
+|09| As <Resource Manager> I want to be able to delete the resources.|
+*------+---------------+
+|10| As <Resource Manager> I want an overview about the resources want an overview about the resources and its reservations.|
+*------+---------------+
+|11| As <Resource Manager> I have all the rights of a customer.|
+*------+---------------+
+|12| As <System Admin> I want to be able to create a ResourceManager.|
+*------+---------------+
+|13| As <System Admin> I want to be able to edit a ResourceManager. |
+*------+---------------+
+|14| As <System Admin> I want to be able to delete a ResourceManager.|
+*------+---------------+
+|15| As <System Admin> I want an overview about the resources and its reservations.|
+*------+---------------+
+|16| As <System Admin> I have all the rights of a Resource Manager.|
+*------+---------------+
 
 
 * 3. Open Issues
