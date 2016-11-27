@@ -1,0 +1,14 @@
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/db/ResourceDB.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/Resource.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/utility/BigArgumentException.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/controller/MyUIControllers.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/db/CustomerDB.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/controller/ReservationService.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/controller/LoginManager.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/Customer.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/utility/SmallArgumentException.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/SystemAdmin.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/view/MainView.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/Reservation.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/ResourceManager.java
+/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/view/MyUI.java

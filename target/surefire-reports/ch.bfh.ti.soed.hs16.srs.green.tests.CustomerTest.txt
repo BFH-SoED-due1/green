@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ch.bfh.ti.soed.hs16.srs.green.tests.CustomerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.328 sec

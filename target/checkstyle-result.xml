@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/controller/LoginManager.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/controller/MyUIControllers.java">
+<error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+<error line="33" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="37" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/controller/ReservationService.java">
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/db/CustomerDB.java">
+<error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/db/ResourceDB.java">
+<error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/Customer.java">
+<error line="41" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/Reservation.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/Resource.java">
+<error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/ResourceManager.java">
+<error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/model/SystemAdmin.java">
+<error line="8" severity="error" message="Line does not match expected header line of &apos;^package &apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/utility/BigArgumentException.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/utility/SmallArgumentException.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/view/MainView.java">
+<error line="1" severity="error" message="Missing a header - not enough lines in file." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
+</file>
+<file name="/Users/masa/Documents/workspace/srs-green/src/main/java/ch/bfh/ti/soed/hs16/srs/green/view/MyUI.java">
+</file>
+</checkstyle>

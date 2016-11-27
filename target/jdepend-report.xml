@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<JDepend>
+    <Packages>
+
+        <Package name="ch.bfh.ti.soed.hs16.srs.green.controller">
+            <Stats>
+                <TotalClasses>3</TotalClasses>
+                <ConcreteClasses>3</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>1</Ca>
+                <Ce>4</Ce>
+                <A>0</A>
+                <I>0.8</I>
+                <D>0.2</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="LoginManager.java">
+                    ch.bfh.ti.soed.hs16.srs.green.controller.LoginManager
+                </Class>
+                <Class sourceFile="MyUIControllers.java">
+                    ch.bfh.ti.soed.hs16.srs.green.controller.MyUIControllers
+                </Class>
+                <Class sourceFile="ReservationService.java">
+                    ch.bfh.ti.soed.hs16.srs.green.controller.ReservationService
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.db</Package>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.model</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="ch.bfh.ti.soed.hs16.srs.green.db">
+            <Stats>
+                <TotalClasses>2</TotalClasses>
+                <ConcreteClasses>2</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>1</Ca>
+                <Ce>5</Ce>
+                <A>0</A>
+                <I>0.83</I>
+                <D>0.17</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="CustomerDB.java">
+                    ch.bfh.ti.soed.hs16.srs.green.db.CustomerDB
+                </Class>
+                <Class sourceFile="ResourceDB.java">
+                    ch.bfh.ti.soed.hs16.srs.green.db.ResourceDB
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.model</Package>
+                <Package>java.io</Package>
+                <Package>java.lang</Package>
+                <Package>java.sql</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.controller</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="ch.bfh.ti.soed.hs16.srs.green.model">
+            <Stats>
+                <TotalClasses>5</TotalClasses>
+                <ConcreteClasses>5</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>3</Ca>
+                <Ce>4</Ce>
+                <A>0</A>
+                <I>0.57</I>
+                <D>0.43</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="Customer.java">
+                    ch.bfh.ti.soed.hs16.srs.green.model.Customer
+                </Class>
+                <Class sourceFile="Reservation.java">
+                    ch.bfh.ti.soed.hs16.srs.green.model.Reservation
+                </Class>
+                <Class sourceFile="Resource.java">
+                    ch.bfh.ti.soed.hs16.srs.green.model.Resource
+                </Class>
+                <Class sourceFile="ResourceManager.java">
+                    ch.bfh.ti.soed.hs16.srs.green.model.ResourceManager
+                </Class>
+                <Class sourceFile="SystemAdmin.java">
+                    ch.bfh.ti.soed.hs16.srs.green.model.SystemAdmin
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.utility</Package>
+                <Package>java.lang</Package>
+                <Package>java.rmi.server</Package>
+                <Package>java.time</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.controller</Package>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.db</Package>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="ch.bfh.ti.soed.hs16.srs.green.utility">
+            <Stats>
+                <TotalClasses>2</TotalClasses>
+                <ConcreteClasses>2</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>1</Ca>
+                <Ce>2</Ce>
+                <A>0</A>
+                <I>0.67</I>
+                <D>0.33</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="BigArgumentException.java">
+                    ch.bfh.ti.soed.hs16.srs.green.utility.BigArgumentException
+                </Class>
+                <Class sourceFile="SmallArgumentException.java">
+                    ch.bfh.ti.soed.hs16.srs.green.utility.SmallArgumentException
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>java.io</Package>
+                <Package>java.lang</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.model</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="ch.bfh.ti.soed.hs16.srs.green.view">
+            <Stats>
+                <TotalClasses>2</TotalClasses>
+                <ConcreteClasses>2</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>0</Ca>
+                <Ce>7</Ce>
+                <A>0</A>
+                <I>1</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="MyUI.java">
+                    ch.bfh.ti.soed.hs16.srs.green.view.MyUI$MyUIServlet
+                </Class>
+                <Class sourceFile="MyUI.java">
+                    ch.bfh.ti.soed.hs16.srs.green.view.MyUI$Reserve
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.controller</Package>
+                <Package>ch.bfh.ti.soed.hs16.srs.green.model</Package>
+                <Package>com.vaadin.server</Package>
+                <Package>com.vaadin.ui</Package>
+                <Package>java.io</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+            </UsedBy>
+        </Package>
+
+        <Package name="com.vaadin.server">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.vaadin.ui">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.io">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.lang">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.rmi.server">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.sql">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.time">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.util">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+    </Packages>
+
+    <Cycles>
+    </Cycles>
+</JDepend>

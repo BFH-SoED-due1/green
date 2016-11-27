@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MyUIControllers.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">srs-green</a> &gt; <a href="index.source.html" class="el_package">ch.bfh.ti.soed.hs16.srs.green.controller</a> &gt; <span class="el_source">MyUIControllers.java</span></div><h1>MyUIControllers.java</h1><pre class="source lang-java linenums">package ch.bfh.ti.soed.hs16.srs.green.controller;
+
+import java.util.Set;
+
+import ch.bfh.ti.soed.hs16.srs.green.db.CustomerDB;
+import ch.bfh.ti.soed.hs16.srs.green.db.ResourceDB;
+import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
+import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
+
+<span class="nc" id="L10">public class MyUIControllers {</span>
+
+<span class="nc" id="L12">	private Set&lt;Customer&gt; customers = CustomerDB.getCustomers();</span>
+<span class="nc" id="L13">	private Set&lt;Resource&gt; resources = ResourceDB.getResources();</span>
+
+	public void register(String name, String email, String pw) throws Throwable {
+
+<span class="nc" id="L17">		CustomerDB.registerCustomer(name, email, pw);</span>
+
+<span class="nc" id="L19">	}</span>
+
+	public boolean login(String name, String pw) {
+
+<span class="nc bnc" id="L23" title="All 2 branches missed.">		for (Customer c : customers) {</span>
+<span class="nc bnc" id="L24" title="All 4 branches missed.">			if (c.getName().equals(name) &amp;&amp; c.getPW().equals(pw))</span>
+<span class="nc" id="L25">				return true;</span>
+<span class="nc" id="L26">		}</span>
+<span class="nc" id="L27">		return false;</span>
+	}
+
+	public Set&lt;Resource&gt; getResources() {
+<span class="nc" id="L31">		return resources;</span>
+	}
+	
+	public int getAmountRooms(){
+<span class="nc" id="L35">		return ResourceDB.getAmountRooms();</span>
+	}
+	
+	public void addRessource(String roomName, String location, int size) throws Throwable{
+<span class="nc" id="L39">		ResourceDB.addResource(roomName, location, size);</span>
+<span class="nc" id="L40">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
