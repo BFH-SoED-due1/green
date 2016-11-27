@@ -10,7 +10,8 @@ package ch.bfh.ti.soed.hs16.srs.green.model;
 public class Customer {
 
 	private String name, email, pw;
-	//private ReservationService rs;
+
+	// private ReservationService rs;
 
 	public Customer(String name, String email, String pw) {
 		this.name = name;
@@ -37,6 +38,9 @@ public class Customer {
 	public void setName(String userName) {
 		name = userName;
 	}
+	
+	public String getPW(){
+		return pw;
+	}
 
 }
- 
