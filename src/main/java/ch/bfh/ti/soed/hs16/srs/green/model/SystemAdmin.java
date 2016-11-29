@@ -10,18 +10,18 @@ package ch.bfh.ti.soed.hs16.srs.green.model;
 
 public class SystemAdmin extends ResourceManager {
 
-	private String userName, email, pw;
+	private String userName, prename, lastname, email, pw;
 
-	public SystemAdmin(String userName, String email, String pw) {
-		super(userName, email, pw);
+	public SystemAdmin(String userName, String prename, String lastname, String email, String pw) {
+		super(userName, prename, lastname, email, pw);
 	}
 
 	public ResourceManager createRescourceManager(Customer user){
 		return (ResourceManager) user;
 	}
 
-	public ResourceManager createRescourceManager(String userName, String email, String pw){
-		return new ResourceManager(userName, email, pw);
+	public ResourceManager createRescourceManager(String userName, String prename, String lastname, String email, String pw){
+		return new ResourceManager(userName, prename, lastname, email, pw);
 	}
 
 }
