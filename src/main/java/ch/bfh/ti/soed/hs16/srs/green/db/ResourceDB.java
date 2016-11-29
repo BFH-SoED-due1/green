@@ -20,19 +20,19 @@ public class ResourceDB {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			System.out.println("FORNAME");
-			c = DriverManager.getConnection("jdbc:sqlite:resource.db");
+			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 			System.out.println("DRIVERMANAGER");
 
 			stmt = c.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT ID FROM CUSTOMER;");
+			ResultSet rs = stmt.executeQuery("SELECT ROOMID FROM RESOURCES;");
 
 			while (rs.next())
-				ID = rs.getInt("id") + 1;
+				ID = rs.getInt("roomid") + 1;
 
 			rs.close();
 
-			String sql = "INSERT INTO RESOURCES (ID,ROOMNAME,LOCATION,SIZE) " + "VALUES (" + ID++ + ", '" + roomName
+			String sql = "INSERT INTO RESOURCES (ROOMID,ROOMNAME,LOCATION,SIZE) " + "VALUES (" + ID++ + ", '" + roomName
 					+ "', '" + locatoin + "', '" + size + "');";
 			System.out.println("CREATESTATEMENT");
 			stmt.executeUpdate(sql);
@@ -52,13 +52,13 @@ public class ResourceDB {
 	public static int getAmountRooms() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:resource.db");
+			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT ID FROM RESOURCES;");
+			ResultSet rs = stmt.executeQuery("SELECT ROOMID FROM RESOURCES;");
 
 			while (rs.next())
-				ID = rs.getInt("id");
+				ID = rs.getInt("roomid");
 
 			rs.close();
 			stmt.close();
@@ -76,12 +76,13 @@ public class ResourceDB {
 		Set<Resource> resources = new HashSet<>();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:resource.db");
+			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT ROOMNAME, LOCATION, SIZE FROM RESOURCES;");
 
 			while (rs.next()) {
+
 				String roomName = rs.getString("roomName");
 				String location = rs.getString("location");
 				int size = rs.getInt("size");
