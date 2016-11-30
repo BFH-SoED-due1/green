@@ -19,46 +19,43 @@ public class CustomerDB {
 			throws Exception {
 
 		try {
+			
 			Class.forName("org.sqlite.JDBC");
-			System.out.println("FORNAME");
 			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-			System.out.println("DRIVERMANAGER");
-
 			stmt = c.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT CUSTOMERID FROM CUSTOMER;");
 
 			while (rs.next())
 				ID = rs.getInt("customerid") + 1;
-
+			
 			rs.close();
 
 			String sql = "INSERT INTO CUSTOMER (CUSTOMERID,USERNAME,PRENAME, LASTNAME, EMAIL, PW) " + "VALUES (" + ID++
 					+ ", '" + userName + "', '" + preName + "', '" + lastName + "', '" + email + "', '" + pw + "');";
-			System.out.println("CREATESTATEMENT");
+			
 			stmt.executeUpdate(sql);
-			System.out.println("EXECUTEUPDATE");
-
 			stmt.close();
-			System.out.println("CLOSE");
 			c.close();
-			System.out.println("CLOSE");
+			
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 	}
 
 	public static Set<Customer> getCustomers() {
+		
 		c = null;
 		stmt = null;
 		Set<Customer> customers = new HashSet<>();
+		
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
+			
 			ResultSet rs = stmt.executeQuery("SELECT USERNAME, PRENAME, LASTNAME, EMAIL, PW FROM CUSTOMER;");
 
 			while (rs.next()) {
@@ -69,9 +66,11 @@ public class CustomerDB {
 				String pw = rs.getString("pw");
 				customers.add(new Customer(userName, preName, lastName, email, pw));
 			}
+			
 			rs.close();
 			stmt.close();
 			c.close();
+			
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 
