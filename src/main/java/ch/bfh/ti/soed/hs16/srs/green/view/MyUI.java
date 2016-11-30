@@ -19,18 +19,23 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.DateField;
+import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.InlineDateField;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
 
 import ch.bfh.ti.soed.hs16.srs.green.controller.MyUIControllers;
+import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
 
@@ -50,10 +55,7 @@ public class MyUI extends UI {
 	private String r, l;
 	private int s;
 	private Button register;
-	private TextField userName, preName, lastName;
-
-	private TextField email;
-	private TextField pw;
+	private TextField userName;
 	private MyUIControllers controller = new MyUIControllers();
 
 	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
@@ -61,37 +63,64 @@ public class MyUI extends UI {
 	public static class MyUIServlet extends VaadinServlet {
 	}
 
-	public class Reserve extends GridLayout {
+	public class ReservationUI extends GridLayout {
+
+		ReservationUI() {
+			super(9, 6);
+			createWindow();
+
+		}
 
 		@SuppressWarnings("deprecation")
-		Reserve() {
-			super(6, controller.getAmountRooms() + 5);
-			System.out.println(controller.getAmountRooms());
-			Label label = new Label(userName.getValue());
-			addComponent(label, 0, 0, 5, 0);
+		public void createWindow() {
+
+			setMargin(true);
+			setSpacing(true);
+
+			Label label = new Label("Welcome " + userName.getValue());
+			addComponent(label, 0, 0, 8, 0);
+
 			InlineDateField date = new InlineDateField();
 			date.setResolution(DateField.RESOLUTION_DAY);
+			addComponent(date, 0, 1, 3, 4);
 
-			TextField from = new TextField();
-			TextField to = new TextField();
+			addComponent(new Label("Time"), 4, 1, 8, 1);
+			addComponent(new Label("From"), 4, 2);
+			addComponent(new Label("Hrs:"), 5, 2);
 
-			addComponent(date, 0, 1, 3, 3);
-			addComponent(new Label("Time: "), 4, 1, 5, 1);
-			addComponent(new Label("From: "), 4, 2);
-			addComponent(new Label("To: "), 4, 3);
-			addComponent(from, 5, 2);
-			addComponent(to, 5, 3);
-			setComponentAlignment(label, Alignment.MIDDLE_CENTER);
+			TextField fromHrs = new TextField();
+			addComponent(fromHrs, 6, 2);
+
+			addComponent(new Label("Min:"), 7, 2);
+			TextField fromMin = new TextField();
+			addComponent(fromMin, 8, 2);
+
+			addComponent(new Label("To"), 4, 3);
+			addComponent(new Label("Hrs:"), 5, 3);
+
+			TextField toHrs = new TextField();
+			addComponent(toHrs, 6, 3);
+
+			addComponent(new Label("Min:"), 7, 3);
+			TextField toMin = new TextField();
+			addComponent(toMin, 8, 3);
+
+			Button reservation = new Button("Make Reservation");
+			addComponent(reservation, 4, 4);
+			reservation.setStyleName(Reindeer.BUTTON_SMALL);
+
+			Button getReservations = new Button("Get Reservations");
+			addComponent(getReservations, 6, 4);
+			getReservations.setStyleName(Reindeer.BUTTON_SMALL);
+
 			Set<Resource> resources = controller.getResources();
 
-			int b = 1;
-
 			Table table = new Table("Please choose Room for Reservation");
-
 			table.addContainerProperty("Roomname", String.class, null);
 			table.addContainerProperty("Location", String.class, null);
 			table.addContainerProperty("Size", Integer.class, null);
 
+			int b = 1;
 			for (Resource r : resources)
 				table.addItem(new Object[] { r.getName(), r.getLocation(), r.getSize() }, b++);
 			System.out.println("addcomponent");
@@ -100,8 +129,11 @@ public class MyUI extends UI {
 			table.addListener(new ItemClickListener() {
 				@Override
 				public void itemClick(ItemClickEvent event) {
+					@SuppressWarnings("rawtypes")
 					Property roomNameP = event.getItem().getItemProperty("Roomname");
+					@SuppressWarnings("rawtypes")
 					Property locationP = event.getItem().getItemProperty("Location");
+					@SuppressWarnings("rawtypes")
 					Property sizeP = event.getItem().getItemProperty("Size");
 					r = (String) roomNameP.getValue();
 					l = (String) locationP.getValue();
@@ -110,114 +142,115 @@ public class MyUI extends UI {
 				}
 			});
 
-			addComponent(table, 0, 5);
+			addComponent(table, 0, 5, 3, 5);
 
-			Button reservation = new Button("make reservation");
-			addComponent(reservation, 4, 4);
 			reservation.addClickListener(ae -> {
 				String dateS = date.getValue().toString();
 
 				int day = Integer.parseInt(dateS.substring(8, 10));
 				int year = Integer.parseInt(dateS.substring(24));
 
-				// int month = Integer.parseInt(dateS.substring(4, 7));
 				try {
 					controller.makeReservation(
 
 							LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
-									Integer.parseInt(from.getValue()), 0),
-							LocalDateTime.of(year, date.getValue().getMonth() + 1, day, Integer.parseInt(to.getValue()),
-									0),
+									Integer.parseInt(fromHrs.getValue()), Integer.parseInt(fromMin.getValue())),
+							LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
+									Integer.parseInt(toHrs.getValue()), Integer.parseInt(toMin.getValue())),
 							new Resource(r, s, l), controller.getCustomer(userName.getValue()));
 				} catch (Throwable e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 
 			});
 
-			Button getReservations = new Button("getReservations");
 			getReservations.addClickListener(ae -> {
-				Set<Reservation> reservations = controller
-						.getReservationsMadeByCustomer(controller.getCustomer(userName.getValue()));
-				for (Reservation r : reservations)
-					System.out.println(r);
+				
+				int b1 = 1;
+
+				Table table1 = new Table("Reservations made by " + userName.getValue());
+
+				table1.addContainerProperty("Roomname", String.class, null);
+				table1.addContainerProperty("Location", String.class, null);
+				table1.addContainerProperty("Starttime", String.class, null);
+				table1.addContainerProperty("Endtime", String.class, null);
+				table1.addContainerProperty("Size", Integer.class, null);
+				
+				Customer custom = controller.getCustomer(userName.getValue());
+				
+				Set<Reservation> reservations1 = controller.getReservationsMadeByCustomer(custom);
+				
+				for (Reservation r : reservations1)
+					table1.addItem(
+							new Object[] { r.getResource().getName(), r.getResource().getLocation(),
+									r.getStartTime().toString(), r.getEndTime().toString(), r.getResource().getSize() },
+							b1++);
+
+				table1.setImmediate(true);
+				addComponent(table1, 4, 5, 8, 5);
 			});
-			addComponent(getReservations,5,4);
+
 		}
 
 	}
 
 	@Override
 	protected void init(VaadinRequest vaadinRequest) {
+
 		VerticalLayout layout = new VerticalLayout();
 
-		userName = new TextField();
-		userName.setCaption("Type your username here:");
+		Panel panel = new Panel("Login");
+		panel.setSizeUndefined();
 
-		preName = new TextField();
-		preName.setCaption("Type your prename here:");
-
-		lastName = new TextField();
-		lastName.setCaption("Type your lastname here:");
-
-		email = new TextField();
-		email.setCaption("Type your email here:");
-
-		pw = new TextField();
-		pw.setCaption("Type your pw here:");
-
+		FormLayout content = new FormLayout();
+		userName = new TextField("Username");
+		content.addComponent(userName);
+		
+		PasswordField password = new PasswordField("Password");
+		content.addComponent(password);
+		
 		Button login = new Button("Login");
-		login.addClickListener(e -> {
-			if ((controller.login(userName.getValue(), pw.getValue()))
-					|| (userName.equals(userName.getValue()) && pw.equals(pw.getValue()))) {
-				System.out.println("great");
-				layout.addComponent(new Label("Thanks " + userName.getValue() + ", login worked!"));
+		register = new Button("Register");
 
-				setContent(new Reserve());
+		login.setStyleName(Reindeer.BUTTON_SMALL);
+		login.setWidth("86px");
+		
+		register.setStyleName(Reindeer.BUTTON_SMALL);
+		register.setWidth("86px");
+
+		HorizontalLayout hl = new HorizontalLayout();
+		hl.setSpacing(true);
+		hl.addComponent(login);
+		hl.addComponent(register);
+
+		content.addComponent(hl);
+		content.setSizeUndefined();
+		content.setMargin(true);
+
+		panel.setContent(content);
+
+		login.addClickListener(e -> {
+			if ((controller.login(userName.getValue(), password.getValue()))
+					|| (userName.equals(userName.getValue()) && password.equals(password.getValue()))) {
+
+				setContent(new ReservationUI());
 			}
 		});
 
-		register = new Button("register now");
 		register.addClickListener(e -> {
 			try {
-				controller.register(userName.getValue(), preName.getValue(), lastName.getValue(), email.getValue(),
-						pw.getValue());
+				controller.register(userName.getValue(), "", "", "", password.getValue());
 			} catch (Throwable e1) {
 
 				e1.printStackTrace();
 			}
 		});
 
-		layout.addComponents(userName, email, pw, login, register);
 		layout.setMargin(true);
 		layout.setSpacing(true);
-
+		layout.addComponent(panel);
 		setContent(layout);
-	}
-
-	public Button getButtonReg() {
-		return register;
-	}
-
-	public TextField getTFN() {
-		return userName;
-	}
-
-	public TextField getTFE() {
-		return email;
-	}
-
-	public TextField getTFP() {
-		return pw;
-	}
-
-	public TextField getUserName() {
-		return userName;
-	}
-
-	public void setUserName(TextField userName) {
-		this.userName = userName;
 	}
 
 }
