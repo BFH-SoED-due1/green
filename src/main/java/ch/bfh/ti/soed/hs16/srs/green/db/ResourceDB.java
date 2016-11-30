@@ -18,11 +18,9 @@ public class ResourceDB {
 	public static void addResource(String roomName, String locatoin, int size) throws Exception {
 
 		try {
+			
 			Class.forName("org.sqlite.JDBC");
-			System.out.println("FORNAME");
 			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-			System.out.println("DRIVERMANAGER");
-
 			stmt = c.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT ROOMID FROM RESOURCES;");
@@ -34,27 +32,26 @@ public class ResourceDB {
 
 			String sql = "INSERT INTO RESOURCES (ROOMID,ROOMNAME,LOCATION,SIZE) " + "VALUES (" + ID++ + ", '" + roomName
 					+ "', '" + locatoin + "', '" + size + "');";
-			System.out.println("CREATESTATEMENT");
+			
 			stmt.executeUpdate(sql);
-			System.out.println("EXECUTEUPDATE");
-
 			stmt.close();
-			System.out.println("CLOSE");
 			c.close();
-			System.out.println("CLOSE");
+			
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 
 	}
 
 	public static int getAmountRooms() {
+		
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
+			
 			ResultSet rs = stmt.executeQuery("SELECT ROOMID FROM RESOURCES;");
 
 			while (rs.next())
@@ -63,37 +60,41 @@ public class ResourceDB {
 			rs.close();
 			stmt.close();
 			c.close();
+			
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-
 		}
+		
 		return ID;
 	}
 
 	public static Set<Resource> getResources() {
+		
 		c = null;
 		stmt = null;
 		Set<Resource> resources = new HashSet<>();
+		
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
+			
 			ResultSet rs = stmt.executeQuery("SELECT ROOMNAME, LOCATION, SIZE FROM RESOURCES;");
 
 			while (rs.next()) {
-
 				String roomName = rs.getString("roomName");
 				String location = rs.getString("location");
 				int size = rs.getInt("size");
 				resources.add(new Resource(roomName, size, location));
 			}
+			
 			rs.close();
 			stmt.close();
 			c.close();
+			
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-
 		}
 
 		return resources;
