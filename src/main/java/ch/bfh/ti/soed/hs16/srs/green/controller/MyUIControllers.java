@@ -16,9 +16,7 @@ public class MyUIControllers {
 	private Set<Resource> resources = ResourceDB.getResources();
 
 	public void register(String userName, String preName, String lastName, String email, String pw) throws Throwable {
-
 		CustomerDB.registerCustomer(userName, preName, lastName, email, pw);
-
 	}
 
 	public Customer getCustomer(String userName) {
@@ -29,7 +27,6 @@ public class MyUIControllers {
 	}
 
 	public boolean login(String userName, String pw) {
-
 		for (Customer c : customers) {
 			if (c.getUserName().equals(userName) && c.getPW().equals(pw))
 				return true;
