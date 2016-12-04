@@ -9,6 +9,7 @@
 package ch.bfh.ti.soed.hs16.srs.green.controller;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import ch.bfh.ti.soed.hs16.srs.green.db.CustomerDB;
@@ -22,6 +23,7 @@ public class MyUIControllers {
 
 	private Set<Customer> customers = CustomerDB.getCustomers();
 	private Set<Resource> resources = ResourceDB.getResources();
+	private Set<Reservation> reservations = ReservationDB.getReservations();
 
 	public void register(String userName, String preName, String lastName, String email, String pw) throws Throwable {
 		CustomerDB.registerCustomer(userName, preName, lastName, email, pw);
@@ -58,9 +60,36 @@ public class MyUIControllers {
 			throws Throwable {
 		ReservationDB.addReservation(startTime, endTime, resource, customer);
 	}
-	
-	public Set<Reservation> getReservationsMadeByCustomer(Customer c){
+
+	public Set<Reservation> getReservationsMadeByCustomer(Customer c) {
 		return ReservationDB.getReservationMadeByCustomer(c);
 	}
 
+	public boolean isAvailable(Reservation r) {
+		Set<Reservation> reservationsMade = new HashSet<>();
+		for (Reservation reserv : reservations)
+			if (reserv.getStartTime().toString().equals(r.getStartTime().toString())
+					&& reserv.getResource().getName().equals(r.getResource().getName()))
+				reservationsMade.add(reserv);
+
+		return false;
+
+	}
+
+	/*
+	 * time(int hrs, int min) ....
+	 * 
+	 *day 00 . 00 - 23.59
+	 *
+	 *bsp reservation1 = 16.00 - 18.00
+	 *		reservato2 = 16:30 - 17.30 --> return false
+	 *
+	 *if (start && end == r.start && r.end)
+	 *else if (end == r. end)
+	 *else if (start == r.start)
+	 *
+	 *
+	 *                      
+	 */
+	
 }
