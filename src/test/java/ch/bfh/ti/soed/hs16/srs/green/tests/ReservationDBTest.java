@@ -17,10 +17,13 @@ public class ReservationDBTest {
 		ReservationDB.addReservation(LocalDateTime.of(2016, 12, 12, 12, 30), LocalDateTime.of(2016, 12, 12, 14, 00),
 				new Resource("TestRoom", 20, "TestLoc"),
 				new Customer("TestUser123", "teste", "testeNach", "teste@fff.ch", "testpw2"));
-	
+
 		assertNotNull(ReservationDB.getReservations());
 	}
-	
-	
+
+	@Test
+	public void getReservMadeByCustomer() {
+
+	}
 
 }
