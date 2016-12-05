@@ -9,34 +9,23 @@ package ch.bfh.ti.soed.hs16.srs.green.model;
 
 public class Customer {
 
-	private String name, email, pw;
-	//private ReservationService rs;
+	private String userName, pw;
 
-	public Customer(String name, String email, String pw) {
-		this.name = name;
-		this.email = email;
+	public Customer(String userName, String pw) {
+		this.userName = userName;
 		this.pw = pw;
 	}
 
 	public boolean checkPW(String pwToCheck) {
-		return pw == pwToCheck;
+		return pw.equals(pwToCheck);
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUserName() {
+		return userName;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setName(String userName) {
-		name = userName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }
- 

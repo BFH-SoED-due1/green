@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
  *
@@ -17,6 +16,7 @@ public class Resource {
 	private UID UID;
 
 	public Resource(String name, int size, String location) {
+
 		this.name = name;
 		this.size = size;
 		this.location = location;
@@ -35,7 +35,7 @@ public class Resource {
 		return size;
 	}
 
-	public UID getUID(){
+	public UID getUID() {
 		return UID;
 	}
 
@@ -51,13 +51,12 @@ public class Resource {
 		this.size = size;
 	}
 
-//	public void add() {
-//		add resource to database
-//	}
+	// public void add() {
+	// add resource to database
+	// }
 
-//	public void remove() {
-//	remove resource to database and delete object
-//}
+	// public void remove() {
+	// remove resource to database and delete object
+	// }
 
 }
-

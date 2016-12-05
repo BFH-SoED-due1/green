@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class Reservation {
 
 	private LocalDateTime startTime, endTime;
+
 	private Resource resource;
 	private Customer customer;
 
@@ -20,6 +21,7 @@ public class Reservation {
 		this.endTime = endTime;
 		this.resource = resource;
 		this.customer = customer;
+
 	}
 
 	public Customer getCustomer() {
@@ -53,4 +55,5 @@ public class Reservation {
 	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
+
 }
