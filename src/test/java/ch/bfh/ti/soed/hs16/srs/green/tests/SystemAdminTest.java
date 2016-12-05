@@ -26,14 +26,14 @@ public class SystemAdminTest {
 
 	@Test
 	public void createResourceManagerTest() {
-		SystemAdmin ad = new SystemAdmin("SvenS", "Sven", "Schön", "sven@email.ch", "12AB");
-		ResourceManager rm = ad.createRescourceManager("MarcoM", "Marco", "Galatioto", "marco@email.ch", "12AB");
+		SystemAdmin ad = new SystemAdmin("SvenS", "12AB");
+		ResourceManager rm = ad.createRescourceManager("MarcoM",  "12AB");
 		assertNotNull(rm);
 	}
 
 	@Test
 	public void createSystemAdminTest() {
-		SystemAdmin ad = new SystemAdmin("SvenS", "Sven", "Schön", "sven@email.ch", "12AB");
+		SystemAdmin ad = new SystemAdmin("SvenS", "12AB");
 		assertNotNull(ad);
 	}
 }

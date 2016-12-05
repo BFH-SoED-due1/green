@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
  *
@@ -13,8 +12,8 @@ import ch.bfh.ti.soed.hs16.srs.green.utility.SmallArgumentException;
 
 public class ResourceManager extends Customer {
 
-	public ResourceManager(String userName, String prename, String lastname, String email, String pw) {
-		super(userName, prename, lastname, email, pw);
+	public ResourceManager(String userName, String pw) {
+		super(userName, pw);
 	}
 
 	public Resource createResource(String resourceName, int resourceSize, String resourceLocation) throws Exception {

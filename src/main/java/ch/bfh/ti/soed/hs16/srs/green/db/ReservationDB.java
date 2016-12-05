@@ -23,155 +23,80 @@ public class ReservationDB {
 
 	private static Connection c = null;
 	private static Statement stmt = null;
-	private static int ID;
 
 	public static void addReservation(LocalDateTime startTime, LocalDateTime endTime, Resource resource,
 			Customer customer) throws Exception {
 
-		try {
+		Class.forName("org.sqlite.JDBC");
+		System.out.println("FORNAME");
+		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
+		stmt = c.createStatement();
 
-			Class.forName("org.sqlite.JDBC");
-			System.out.println("FORNAME");
-			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-			stmt = c.createStatement();
+		Statement forRoomID = c.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT RESERVATIONID FROM RESERVATIONS;");
+		ResultSet roIDr = forRoomID.executeQuery("select rowid from resources where location = '"
+				+ resource.getLocation() + "' and  roomName = '" + resource.getName() + "';");
 
-			while (rs.next())
-				ID = rs.getInt("reservationid") + 1;
+		int roID = roIDr.getInt("rowid");
 
-			Statement forRoomID = c.createStatement();
+		String sql = "INSERT INTO RESERVATIONS (STARTTIME, ENDTIME, ROOMID, USERNAME) " + "VALUES ('" + startTime
+				+ "', '" + endTime + "', '" + roID + "', '" + customer.getUserName() + "');";
 
-			ResultSet roIDr = forRoomID.executeQuery("select roomid from resources where location = '"
-					+ resource.getLocation() + "' and  roomName = '" + resource.getName() + "';");
+		stmt.executeUpdate(sql);
 
-			int roID = roIDr.getInt("roomid");
+		roIDr.close();
 
-			String sql = "INSERT INTO RESERVATIONS (RESERVATIONID,STARTTIME, ENDTIME, ROOMID, USERNAME) " + "VALUES ("
-					+ ID++ + ", '" + startTime + "', '" + endTime + "', '" + roID + "', '" + customer.getUserName()
-					+ "');";
-
-			stmt.executeUpdate(sql);
-
-			roIDr.close();
-			rs.close();
-			stmt.close();
-			c.close();
-
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-
-		// folder: pushe - master - git merge branchname
+		stmt.close();
+		c.close();
 
 	}
 
-	public static Set<Reservation> getReservations() {
+	public static Set<Reservation> getReservationMadeByCustomer(Customer customer) throws Exception {
 		c = null;
 		stmt = null;
 		Set<Reservation> reservations = new HashSet<>();
-		try {
 
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-			c.setAutoCommit(false);
-			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM RESERVATIONS;");
+		Class.forName("org.sqlite.JDBC");
+		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
+		c.setAutoCommit(false);
+		stmt = c.createStatement();
 
-			while (rs.next()) {
+		ResultSet rs = stmt
+				.executeQuery("SELECT STARTTIME, ENDTIME, ROOMID, USERNAME FROM RESERVATIONS WHERE USERNAME = '"
+						+ customer.getUserName() + "';");
 
-				LocalDateTime startTime = LocalDateTime.parse(rs.getString("startTime"));
-				LocalDateTime endTime = LocalDateTime.parse(rs.getString("endTime"));
+		while (rs.next()) {
 
-				int roomID1 = rs.getInt("roomid");
-				ResultSet resourceQ = c.createStatement()
-						.executeQuery("SELECT * FROM RESOURCES WHERE ROOMID = " + roomID1 + ";");
+			LocalDateTime startTime = LocalDateTime.parse(rs.getString("startTime"));
+			LocalDateTime endTime = LocalDateTime.parse(rs.getString("endTime"));
 
-				String roomN = resourceQ.getString("roomName");
-				String loc = resourceQ.getString("location");
+			int roomID1 = rs.getInt("roomid");
 
-				int size = resourceQ.getInt("size");
+			ResultSet resourceQ = c.createStatement()
+					.executeQuery("SELECT * FROM RESOURCES WHERE ROWID = " + roomID1 + ";");
 
-				Resource resource = new Resource(roomN, size, loc);
+			String roomN = resourceQ.getString("roomName");
+			String loc = resourceQ.getString("location");
 
-				ResultSet customerQ = c.createStatement().executeQuery(
-						"SELECT * FROM CUSTOMER WHERE (SELECT USERNAME FROM CUSTOMER) = (SELECT USERNAME FROM RESERVATIONS);");
+			int size = resourceQ.getInt("size");
 
-				String cust = customerQ.getString("userName");
-				String pren = customerQ.getString("prename");
-				String last = customerQ.getString("lastname");
-				String email = customerQ.getString("email");
-				String pw = customerQ.getString("pw");
+			Resource resource = new Resource(roomN, size, loc);
+			ResultSet customerQ = c.createStatement()
+					.executeQuery("SELECT * FROM CUSTOMER WHERE USERNAME = '" + customer.getUserName() + "';");
 
-				Customer customer = new Customer(cust, pren, last, email, pw);
+			String cust = customerQ.getString("userName");
+			String pw = customerQ.getString("pw");
 
-				reservations.add(new Reservation(startTime, endTime, resource, customer));
-			}
+			Customer userName = new Customer(cust, pw);
 
-			rs.close();
-			stmt.close();
-			c.close();
-
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			reservations.add(new Reservation(startTime, endTime, resource, userName));
 
 		}
 
-		return reservations;
-	}
+		rs.close();
+		stmt.close();
+		c.close();
 
-	public static Set<Reservation> getReservationMadeByCustomer(Customer customer) {
-		c = null;
-		stmt = null;
-		Set<Reservation> reservations = new HashSet<>();
-		try {
-
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-			c.setAutoCommit(false);
-			stmt = c.createStatement();
-
-			ResultSet rs = stmt
-					.executeQuery("SELECT STARTTIME, ENDTIME, ROOMID, USERNAME FROM RESERVATIONS WHERE USERNAME = '"
-							+ customer.getUserName() + "';");
-
-			while (rs.next()) {
-
-				LocalDateTime startTime = LocalDateTime.parse(rs.getString("startTime"));
-				LocalDateTime endTime = LocalDateTime.parse(rs.getString("endTime"));
-
-				int roomID1 = rs.getInt("roomid");
-
-				ResultSet resourceQ = c.createStatement()
-						.executeQuery("SELECT * FROM RESOURCES WHERE ROOMID = " + roomID1 + ";");
-
-				String roomN = resourceQ.getString("roomName");
-				String loc = resourceQ.getString("location");
-
-				int size = resourceQ.getInt("size");
-
-				Resource resource = new Resource(roomN, size, loc);
-				ResultSet customerQ = c.createStatement()
-						.executeQuery("SELECT * FROM CUSTOMER WHERE USERNAME = '" + customer.getUserName() + "';");
-
-				String cust = customerQ.getString("userName");
-				String pren = customerQ.getString("prename");
-				String last = customerQ.getString("lastname");
-				String email = customerQ.getString("email");
-				String pw = customerQ.getString("pw");
-
-				Customer userName = new Customer(cust, pren, last, email, pw);
-
-				reservations.add(new Reservation(startTime, endTime, resource, userName));
-
-			}
-
-			rs.close();
-			stmt.close();
-			c.close();
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-		}
 		return reservations;
 	}
 

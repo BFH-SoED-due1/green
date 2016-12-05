@@ -19,25 +19,25 @@ public class ResourceManangerTest {
 
 	@Test
 	public void chreatNewResourceManager() {
-		ResourceManager rm1 = new ResourceManager("SvenS", "Sven","Schön", "sven@email.ch", "12AB");
+		ResourceManager rm1 = new ResourceManager("SvenS",  "12AB");
 		assertNotNull(rm1);
 	}
 
 	@Test
 	public void createNewResource() throws Exception{
-		ResourceManager rm1 = new ResourceManager("SvenS", "Sven","Schön", "sven@email.ch", "12AB");
+		ResourceManager rm1 = new ResourceManager("SvenS", "12AB");
 		rm1.createResource("Room", 20, "Valhalla");
 	}
 
 	@Test (expected = BigArgumentException.class)
 	public void createNewResourceToLargeName() throws Exception{
-		ResourceManager rm1 = new ResourceManager("SvenS", "Sven","Schön", "sven@email.ch", "12AB");
+		ResourceManager rm1 = new ResourceManager("SvenS",  "12AB");
 		rm1.createResource("ThisIsAVeryLongLongLongRoomName", 20, "Valhalla");
 	}
 
 	@Test (expected = SmallArgumentException.class)
 	public void createNewResourceUnderMinSize() throws Exception{
-		ResourceManager rm1 = new ResourceManager("SvenS", "Sven","Schön", "sven@email.ch", "12AB");
+		ResourceManager rm1 = new ResourceManager("SvenS",  "12AB");
 		rm1.createResource("Room", -1, "Valhalla");
 	}
 

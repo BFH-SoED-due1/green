@@ -5,11 +5,9 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-
 package ch.bfh.ti.soed.hs16.srs.green.controller;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 import ch.bfh.ti.soed.hs16.srs.green.db.CustomerDB;
@@ -21,16 +19,24 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
 
 public class MyUIControllers {
 
-	private Set<Customer> customers = CustomerDB.getCustomers();
-	private Set<Resource> resources = ResourceDB.getResources();
-	private Set<Reservation> reservations = ReservationDB.getReservations();
+	private Set<Customer> customers;
 
-	public void register(String userName, String preName, String lastName, String email, String pw) throws Throwable {
-		CustomerDB.registerCustomer(userName, preName, lastName, email, pw);
+	private Set<Resource> resources;
+
+	public MyUIControllers() throws Throwable {
+
+		customers = CustomerDB.getCustomers();
+		resources = ResourceDB.getResources();
+
+	}
+
+	public void register(String userName, String pw) throws Throwable {
+		CustomerDB.registerCustomer(userName, pw);
 	}
 
 	public Customer getCustomer(String userName) {
 		for (Customer c : customers)
+
 			if (c.getUserName().equals(userName))
 				return c;
 		return null;
@@ -38,7 +44,7 @@ public class MyUIControllers {
 
 	public boolean login(String userName, String pw) {
 		for (Customer c : customers) {
-			if (c.getUserName().equals(userName) && c.getPW().equals(pw))
+			if (c.getUserName().equals(userName) && c.checkPW(pw))
 				return true;
 		}
 		return false;
@@ -48,7 +54,7 @@ public class MyUIControllers {
 		return resources;
 	}
 
-	public int getAmountRooms() {
+	public int getAmountRooms() throws Throwable {
 		return ResourceDB.getAmountRooms();
 	}
 
@@ -61,35 +67,8 @@ public class MyUIControllers {
 		ReservationDB.addReservation(startTime, endTime, resource, customer);
 	}
 
-	public Set<Reservation> getReservationsMadeByCustomer(Customer c) {
+	public Set<Reservation> getReservationsMadeByCustomer(Customer c) throws Exception {
 		return ReservationDB.getReservationMadeByCustomer(c);
 	}
 
-	public boolean isAvailable(Reservation r) {
-		Set<Reservation> reservationsMade = new HashSet<>();
-		for (Reservation reserv : reservations)
-			if (reserv.getStartTime().toString().equals(r.getStartTime().toString())
-					&& reserv.getResource().getName().equals(r.getResource().getName()))
-				reservationsMade.add(reserv);
-
-		return false;
-
-	}
-
-	/*
-	 * time(int hrs, int min) ....
-	 * 
-	 *day 00 . 00 - 23.59
-	 *
-	 *bsp reservation1 = 16.00 - 18.00
-	 *		reservato2 = 16:30 - 17.30 --> return false
-	 *
-	 *if (start && end == r.start && r.end)
-	 *else if (end == r. end)
-	 *else if (start == r.start)
-	 *
-	 *
-	 *                      
-	 */
-	
 }

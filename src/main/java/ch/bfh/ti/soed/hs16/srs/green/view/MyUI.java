@@ -56,7 +56,11 @@ public class MyUI extends UI {
 	private int s;
 	private Button register;
 	private TextField userName;
-	private MyUIControllers controller = new MyUIControllers();
+	private MyUIControllers controller;
+
+	public MyUI() throws Throwable {
+		controller = new MyUIControllers();
+	}
 
 	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
 	@VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
@@ -166,7 +170,7 @@ public class MyUI extends UI {
 			});
 
 			getReservations.addClickListener(ae -> {
-				
+
 				int b1 = 1;
 
 				Table table1 = new Table("Reservations made by " + userName.getValue());
@@ -176,11 +180,17 @@ public class MyUI extends UI {
 				table1.addContainerProperty("Starttime", String.class, null);
 				table1.addContainerProperty("Endtime", String.class, null);
 				table1.addContainerProperty("Size", Integer.class, null);
-				
+
 				Customer custom = controller.getCustomer(userName.getValue());
-				
-				Set<Reservation> reservations1 = controller.getReservationsMadeByCustomer(custom);
-				
+
+				Set<Reservation> reservations1 = null;
+				try {
+					reservations1 = controller.getReservationsMadeByCustomer(custom);
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+
 				for (Reservation r : reservations1)
 					table1.addItem(
 							new Object[] { r.getResource().getName(), r.getResource().getLocation(),
@@ -206,16 +216,16 @@ public class MyUI extends UI {
 		FormLayout content = new FormLayout();
 		userName = new TextField("Username");
 		content.addComponent(userName);
-		
+
 		PasswordField password = new PasswordField("Password");
 		content.addComponent(password);
-		
+
 		Button login = new Button("Login");
 		register = new Button("Register");
 
 		login.setStyleName(Reindeer.BUTTON_SMALL);
 		login.setWidth("86px");
-		
+
 		register.setStyleName(Reindeer.BUTTON_SMALL);
 		register.setWidth("86px");
 
@@ -240,7 +250,7 @@ public class MyUI extends UI {
 
 		register.addClickListener(e -> {
 			try {
-				controller.register(userName.getValue(), "", "", "", password.getValue());
+				controller.register(userName.getValue(), password.getValue());
 			} catch (Throwable e1) {
 
 				e1.printStackTrace();
