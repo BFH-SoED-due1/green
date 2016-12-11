@@ -9,6 +9,7 @@ package ch.bfh.ti.soed.hs16.srs.green.model;
 
 public class SystemAdmin extends ResourceManager {
 
+	// TODO Unused fields; harmonize with super classes
 	private String userName, prename, lastname, email, pw;
 
 	public SystemAdmin(String userName, String pw) {
