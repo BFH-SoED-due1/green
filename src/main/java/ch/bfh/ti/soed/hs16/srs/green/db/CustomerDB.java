@@ -15,19 +15,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 public class CustomerDB {
 
 	private static Connection c = null;
 	private static Statement stmt = null;
 
-	public static void registerCustomer(String userName, String pw) throws Exception {
+	public static void registerCustomer(String userName, String pw, Role x) throws Exception {
 
 		Class.forName("org.sqlite.JDBC");
 		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-
-		String sql = "INSERT INTO Customer (USERNAME,PW) " + "VALUES ('" + userName + "', '" + pw + "');";
-
+		
+		String sql = "INSERT INTO Customer (USERNAME,PW,RIGHTS) " + "VALUES ('" + userName + "', '" + pw + "', '"+x.toString()+"');";
 		c.createStatement().executeUpdate(sql);
 
 		c.close();
@@ -41,16 +41,17 @@ public class CustomerDB {
 
 		Class.forName("org.sqlite.JDBC");
 		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		c.setAutoCommit(false);
+	//	c.setAutoCommit(false);
 		stmt = c.createStatement();
 
-		ResultSet rs = stmt.executeQuery("SELECT USERNAME, PW FROM CUSTOMER;");
+		ResultSet rs = stmt.executeQuery("SELECT USERNAME, PW, RIGHTS FROM CUSTOMER;");
 
 		while (rs.next()) {
 			String userName = rs.getString("username");
 
 			String pw = rs.getString("pw");
-			customers.add(new Customer(userName, pw));
+			
+			customers.add(new Customer(userName, pw,Role.valueOf(rs.getString("rights"))));
 		}
 
 		rs.close();

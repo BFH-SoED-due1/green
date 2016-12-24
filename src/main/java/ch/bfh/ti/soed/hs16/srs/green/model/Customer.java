@@ -8,12 +8,14 @@
 package ch.bfh.ti.soed.hs16.srs.green.model;
 
 public class Customer {
-
+	
+	private final Role rights;
 	private String userName, pw;
-
-	public Customer(String userName, String pw) {
+	
+	public Customer(String userName, String pw, Role role) {
 		this.userName = userName;
 		this.pw = pw;
+		this.rights=role;
 	}
 
 	public boolean checkPW(String pwToCheck) {
@@ -26,6 +28,10 @@ public class Customer {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Role getRole() {
+		return rights;
 	}
 
 }

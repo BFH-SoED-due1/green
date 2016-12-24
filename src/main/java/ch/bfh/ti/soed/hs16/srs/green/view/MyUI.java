@@ -20,6 +20,7 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -38,6 +39,7 @@ import ch.bfh.ti.soed.hs16.srs.green.controller.MyUIControllers;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -68,11 +70,10 @@ public class MyUI extends UI {
 	}
 
 	public class ReservationUI extends GridLayout {
-
+		private int b;
 		ReservationUI() {
 			super(9, 6);
 			createWindow();
-
 		}
 
 		@SuppressWarnings("deprecation")
@@ -116,6 +117,23 @@ public class MyUI extends UI {
 			Button getReservations = new Button("Get Reservations");
 			addComponent(getReservations, 6, 4);
 			getReservations.setStyleName(Reindeer.BUTTON_SMALL);
+			
+			int roomSize = 12;
+			Button addRoom = new Button("Add Room");
+			Button removeRoom = new Button("Remove Room");
+			TextField roomField = new TextField("Room to add/remove, size will be 12 at adding");
+			TextField locationField = new TextField("Location to add/remove");
+			try {
+				if (controller.getCustomer(userName.getValue()).getRole().equals(Role.ROOMMANAGER)){
+					addComponent(roomField,4,5);
+					addComponent(locationField,6,5);
+					addComponent(addRoom,7,5);
+					addComponent(removeRoom,8,5);
+				}
+			} catch (Throwable e1) {
+				
+				e1.printStackTrace();
+			};
 
 			Set<Resource> resources = controller.getResources();
 
@@ -124,9 +142,10 @@ public class MyUI extends UI {
 			table.addContainerProperty("Location", String.class, null);
 			table.addContainerProperty("Size", Integer.class, null);
 
-			int b = 1;
+			b = 1;
 			for (Resource r : resources)
 				table.addItem(new Object[] { r.getName(), r.getLocation(), r.getSize() }, b++);
+			
 			System.out.println("addcomponent");
 			table.setSelectable(true);
 			table.setImmediate(true);
@@ -155,15 +174,21 @@ public class MyUI extends UI {
 				int year = Integer.parseInt(dateS.substring(24));
 
 				try {
-					controller.makeReservation(
-
+					if (controller.isAvailable(
 							LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
 									Integer.parseInt(fromHrs.getValue()), Integer.parseInt(fromMin.getValue())),
 							LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
 									Integer.parseInt(toHrs.getValue()), Integer.parseInt(toMin.getValue())),
-							new Resource(r, s, l), controller.getCustomer(userName.getValue()));
-				} catch (Throwable e) {
+							new Resource(r, s, l))) {
+						controller.makeReservation(
 
+								LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
+										Integer.parseInt(fromHrs.getValue()), Integer.parseInt(fromMin.getValue())),
+								LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
+										Integer.parseInt(toHrs.getValue()), Integer.parseInt(toMin.getValue())),
+								new Resource(r, s, l), controller.getCustomer(userName.getValue()));
+					}
+				} catch (Throwable e) {
 					e.printStackTrace();
 				}
 
@@ -181,16 +206,17 @@ public class MyUI extends UI {
 				table1.addContainerProperty("Endtime", String.class, null);
 				table1.addContainerProperty("Size", Integer.class, null);
 
-				Customer custom = controller.getCustomer(userName.getValue());
+				Customer custom;
 
 				Set<Reservation> reservations1 = null;
 				try {
+					custom = controller.getCustomer(userName.getValue());
 					reservations1 = controller.getReservationsMadeByCustomer(custom);
-				} catch (Exception e) {
+				} catch (Throwable e) {
 
 					e.printStackTrace();
 				}
-
+				
 				for (Reservation r : reservations1)
 					table1.addItem(
 							new Object[] { r.getResource().getName(), r.getResource().getLocation(),
@@ -199,7 +225,25 @@ public class MyUI extends UI {
 
 				table1.setImmediate(true);
 				addComponent(table1, 4, 5, 8, 5);
-			});
+			}); 
+			
+			addRoom.addClickListener(ae ->{try {
+				if((roomField.isEmpty()||locationField.isEmpty())==false){
+				controller.addRessource(roomField.getValue(),locationField.getValue(),roomSize);
+				table.addItem(new Object[] {roomField.getValue(), locationField.getValue(), roomSize }, b++);
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}});
+			removeRoom.addClickListener(ae ->{try {
+				if((roomField.isEmpty()||locationField.isEmpty())==false){
+				controller.deleteRessource(roomField.getValue(),locationField.getValue());
+			
+				table.removeItem(new Object[] {roomField.getValue(), locationField.getValue(), roomSize });
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}});
 
 		}
 
@@ -222,17 +266,22 @@ public class MyUI extends UI {
 
 		Button login = new Button("Login");
 		register = new Button("Register");
+		CheckBox askBox = new CheckBox("Are you a Roommanager?");
+		
 
 		login.setStyleName(Reindeer.BUTTON_SMALL);
 		login.setWidth("86px");
 
 		register.setStyleName(Reindeer.BUTTON_SMALL);
 		register.setWidth("86px");
+		askBox.setStyleName(Reindeer.BUTTON_SMALL);
+	
 
 		HorizontalLayout hl = new HorizontalLayout();
 		hl.setSpacing(true);
 		hl.addComponent(login);
 		hl.addComponent(register);
+		hl.addComponent(askBox);
 
 		content.addComponent(hl);
 		content.setSizeUndefined();
@@ -241,18 +290,24 @@ public class MyUI extends UI {
 		panel.setContent(content);
 
 		login.addClickListener(e -> {
-			if ((controller.login(userName.getValue(), password.getValue()))
-					|| (userName.equals(userName.getValue()) && password.equals(password.getValue()))) {
-
-				setContent(new ReservationUI());
+			System.out.println(userName.getValue());
+			System.out.println(password.getValue());
+			try {
+				if ((controller.login(userName.getValue(), password.getValue()))
+						|| (userName.equals(userName.getValue()) && password.equals(password.getValue()))) {
+					setContent(new ReservationUI());
+				}
+			} catch (Throwable e1) {
+				e1.printStackTrace();
 			}
 		});
-
+		
+		
 		register.addClickListener(e -> {
 			try {
-				controller.register(userName.getValue(), password.getValue());
+				Role x=askBox.getValue()?Role.ROOMMANAGER:Role.CUSTOMER;
+				controller.register(userName.getValue(), password.getValue(),x);
 			} catch (Throwable e1) {
-
 				e1.printStackTrace();
 			}
 		});

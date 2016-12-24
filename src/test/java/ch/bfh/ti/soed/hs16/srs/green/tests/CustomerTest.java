@@ -15,32 +15,33 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 public class CustomerTest {
 
 	@Test
 	public void checkFalsePwTest() {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB",Role.CUSTOMER);
 		String pw = "12345";
 		assertFalse(u1.checkPW(pw));
 	}
 
 	@Test
 	public void checkRhightPwTest() {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB",Role.CUSTOMER);
 		String pw = "12AB";
 		assertTrue(u1.checkPW(pw));
 	}
 
 	@Test
 	public void createCustumerTest() {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB",Role.CUSTOMER);
 		assertNotNull(u1);
 	}
 
 	@Test
 	public void setUserNameTest() {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB",Role.CUSTOMER);
 		u1.setUserName("SvenNeuPre");
 		assertEquals(u1.getUserName(), "SvenNeuPre");
 	}

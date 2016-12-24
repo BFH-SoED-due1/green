@@ -18,13 +18,14 @@ import org.junit.Test;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 public class ReservationTest {
 
 	@Test
 	public void changeCustomerTest() throws Exception {
-		Customer u1 = new Customer("SvenS", "12AB");
-		Customer u2 = new Customer("MarcoG", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB", Role.CUSTOMER);
+		Customer u2 = new Customer("MarcoG", "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), LocalDateTime.of(2016, 3, 3, 12, 30),
 				r1, u1);
@@ -35,7 +36,7 @@ public class ReservationTest {
 
 	@Test
 	public void changeResourceTest() throws Exception {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		Resource r2 = new Resource("R2.5", 15, "Quellweg 21");
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), LocalDateTime.of(2016, 3, 3, 12, 30),
@@ -47,7 +48,7 @@ public class ReservationTest {
 
 	@Test
 	public void changeStartAndEndTimeTest() throws Exception {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), LocalDateTime.of(2016, 3, 3, 12, 30),
 				r1, u1);
@@ -60,7 +61,7 @@ public class ReservationTest {
 
 	@Test
 	public void checkAGeneratedReservationsEndTimeTest() throws Exception {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		LocalDateTime endTime = LocalDateTime.of(2016, 3, 3, 12, 30);
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), endTime, r1, u1);
@@ -69,7 +70,7 @@ public class ReservationTest {
 
 	@Test
 	public void checkAGeneratedReservationsRoomTest() throws Exception {
-		Customer u1 = new Customer("SvenS",  "12AB");
+		Customer u1 = new Customer("SvenS",  "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), LocalDateTime.of(2016, 3, 3, 12, 30),
 				r1, u1);
@@ -78,7 +79,7 @@ public class ReservationTest {
 
 	@Test
 	public void checkAGeneratedReservationsStartTimeTest() throws Exception {
-		Customer u1 = new Customer("SvenS",  "12AB");
+		Customer u1 = new Customer("SvenS",  "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		LocalDateTime startTime = LocalDateTime.of(2016, 3, 3, 12, 15);
 		Reservation res = new Reservation(startTime, LocalDateTime.of(2016, 3, 3, 12, 30), r1, u1);
@@ -87,7 +88,7 @@ public class ReservationTest {
 
 	@Test
 	public void checkAGeneratedReservationsUserTest() throws Exception {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), LocalDateTime.of(2016, 3, 3, 12, 30),
 				r1, u1);
@@ -96,7 +97,7 @@ public class ReservationTest {
 
 	@Test
 	public void compareTwoDifferentReservations() throws Exception {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), LocalDateTime.of(2016, 3, 3, 12, 30),
 				r1, u1);
@@ -107,7 +108,7 @@ public class ReservationTest {
 
 	@Test
 	public void generateAReservationTest() throws Exception {
-		Customer u1 = new Customer("SvenS", "12AB");
+		Customer u1 = new Customer("SvenS", "12AB", Role.CUSTOMER);
 		Resource r1 = new Resource("R1.1", 20, "Quellweg 21");
 		Reservation res = new Reservation(LocalDateTime.of(2016, 3, 3, 12, 15), LocalDateTime.of(2016, 3, 3, 12, 30),
 				r1, u1);

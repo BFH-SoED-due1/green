@@ -34,6 +34,18 @@ public class ResourceDB {
 		c.close();
 
 	}
+	public static void removeResource(String roomName, String locatoin) throws Throwable {
+
+		Class.forName("org.sqlite.JDBC");
+		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
+		stmt = c.createStatement();
+
+		String sql = "DELETE FROM RESOURCES WHERE ROOMNAME= '" + roomName + "' AND LOCATION= '" + locatoin+ "';";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		c.close();
+
+	}
 
 	public static int getAmountRooms() throws Throwable {
 		Class.forName("org.sqlite.JDBC");
@@ -43,6 +55,7 @@ public class ResourceDB {
 		int res = rs.getInt("countinho");
 		rs.close();
 		stmt.close();
+		c.close();
 		return res;
 	}
 
@@ -62,11 +75,10 @@ public class ResourceDB {
 			int size = rs.getInt("size");
 			resources.add(new Resource(roomName, size, location));
 
-			rs.close();
-			stmt.close();
-			c.close();
-
 		}
+		rs.close();
+		stmt.close();
+		c.close();
 		return resources;
 	}
 

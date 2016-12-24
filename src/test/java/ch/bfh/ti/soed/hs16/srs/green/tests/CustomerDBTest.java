@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import ch.bfh.ti.soed.hs16.srs.green.db.CustomerDB;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 public class CustomerDBTest {
 
@@ -40,7 +41,7 @@ public class CustomerDBTest {
 		stmt.close();
 		c.close();
 		
-		CustomerDB.registerCustomer("MarcoM", "testPW");
+		CustomerDB.registerCustomer("MarcoM", "testPW",Role.CUSTOMER);
 		Set<Customer> customer = CustomerDB.getCustomers();
 		assertNotNull(customer);
 
@@ -55,7 +56,7 @@ public class CustomerDBTest {
 		stmt.close();
 		co.close();
 
-		CustomerDB.registerCustomer("MarcoM2", "testPW");
+		CustomerDB.registerCustomer("MarcoM2", "testPW",Role.CUSTOMER);
 		Set<Customer> customer = CustomerDB.getCustomers();
 		Set<Customer> customerToCheck = new HashSet<>();
 		for (Customer c : customer)

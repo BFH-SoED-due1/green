@@ -22,6 +22,7 @@ import ch.bfh.ti.soed.hs16.srs.green.db.ResourceDB;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 public class ReservationDBTest {
 	@Test
@@ -38,12 +39,12 @@ public class ReservationDBTest {
 		c.createStatement().executeUpdate("delete from reservations;");
 		c.createStatement().executeUpdate("delete from customer;");
 		c.createStatement().executeUpdate("delete from resources;");
-		CustomerDB.registerCustomer("SvenTest", "testpw");
+		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 		c.close();
 
 		ReservationDB.addReservation(LocalDateTime.of(2018, 12, 12, 12, 30), LocalDateTime.of(2018, 12, 12, 14, 00),
-				new Resource("RoomTest2", 44, "RoomLocationTest2"), new Customer("SvenTest", "testpw"));
+				new Resource("RoomTest2", 44, "RoomLocationTest2"), new Customer("SvenTest", "testpw", Role.CUSTOMER));
 
 	}
 
@@ -56,11 +57,11 @@ public class ReservationDBTest {
 		c.createStatement().executeUpdate("delete from customer;");
 		c.createStatement().executeUpdate("delete from resources;");
 		
-		CustomerDB.registerCustomer("SvenTest", "testpw");
+		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 		
 
-		Customer u1 = new Customer("SvenTest", "testpw");
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 
 		ReservationDB.addReservation(LocalDateTime.of(2018, 12, 12, 12, 30), LocalDateTime.of(2018, 12, 12, 14, 00),
 				new Resource("RoomTest2", 44, "RoomLocationTest2"), u1);
@@ -71,4 +72,27 @@ public class ReservationDBTest {
 
 	}
 
+	
+	@Test
+	public void getAllReservations() throws Throwable {
+
+		Class.forName("org.sqlite.JDBC");
+		Connection c = DriverManager.getConnection("jdbc:sqlite:srs.db");
+		c.createStatement().executeUpdate("delete from reservations;");
+		c.createStatement().executeUpdate("delete from customer;");
+		c.createStatement().executeUpdate("delete from resources;");
+
+		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
+
+		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+
+		ReservationDB.addReservation(LocalDateTime.of(2018, 12, 12, 12, 30), LocalDateTime.of(2018, 12, 12, 14, 00),
+				new Resource("RoomTest2", 44, "RoomLocationTest2"), u1);
+
+		Set<Reservation> sets = ReservationDB.getReservations();
+		c.close();
+		assertNotNull(sets);
+
+	}
 }

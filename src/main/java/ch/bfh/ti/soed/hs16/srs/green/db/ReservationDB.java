@@ -18,6 +18,7 @@ import java.util.Set;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 public class ReservationDB {
 
@@ -28,7 +29,6 @@ public class ReservationDB {
 			Customer customer) throws Exception {
 
 		Class.forName("org.sqlite.JDBC");
-		System.out.println("FORNAME");
 		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 		stmt = c.createStatement();
 
@@ -86,8 +86,8 @@ public class ReservationDB {
 
 			String cust = customerQ.getString("userName");
 			String pw = customerQ.getString("pw");
-
-			Customer userName = new Customer(cust, pw);
+			
+			Customer userName = new Customer(cust, pw,Role.valueOf(customerQ.getString("rights")));
 
 			reservations.add(new Reservation(startTime, endTime, resource, userName));
 
@@ -98,6 +98,40 @@ public class ReservationDB {
 		c.close();
 
 		return reservations;
+	}
+
+	public static Set<Reservation> getReservations() throws Exception {
+
+		Set<Reservation> reservations = new HashSet<>();
+
+		Class.forName("org.sqlite.JDBC");
+		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
+
+		ResultSet rs = c.createStatement().executeQuery("SELECT STARTTIME, ENDTIME, ROOMID FROM RESERVATIONS;");
+
+		while (rs.next()) {
+
+			LocalDateTime startTime = LocalDateTime.parse(rs.getString("startTime"));
+			LocalDateTime endTime = LocalDateTime.parse(rs.getString("endTime"));
+
+			int roomID1 = rs.getInt("roomid");
+
+			ResultSet resourceQ = c.createStatement()
+					.executeQuery("SELECT * FROM RESOURCES WHERE ROWID = " + roomID1 + ";");
+
+			String roomN = resourceQ.getString("roomName");
+			String loc = resourceQ.getString("location");
+
+			int size = resourceQ.getInt("size");
+
+			Resource resource = new Resource(roomN, size, loc);
+
+			reservations.add(new Reservation(startTime, endTime, resource, null));
+		}
+		rs.close();
+		c.close();
+		return reservations;
+
 	}
 
 }
