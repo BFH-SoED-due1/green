@@ -20,11 +20,31 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
 import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
+/**
+ * A class which represents the reservations table in the srs.db. Class is only
+ * used by the class MyUIControllers.
+ * 
+ * @author team-green
+ * @version 1.4, 18.12.16
+ */
 public class ReservationDB {
 
 	private static Connection c = null;
 	private static Statement stmt = null;
 
+	/**
+	 * A method which adds a reservation to the reservations table in srs.db.
+	 * 
+	 * @param startTime
+	 *            At what time the reservation starts.
+	 * @param endTime
+	 *            At what time the reservation ends.
+	 * @param resource
+	 *            In which room the reservation is.
+	 * @param customer
+	 *            Which customer made the reservation.
+	 * @throws Exception
+	 */
 	public static void addReservation(LocalDateTime startTime, LocalDateTime endTime, Resource resource,
 			Customer customer) throws Exception {
 
@@ -50,6 +70,16 @@ public class ReservationDB {
 		c.close();
 
 	}
+
+	/**
+	 * Returns all reservations made by a specific customer.
+	 * 
+	 * @param customer
+	 *            customer, of which you want to have all reservations.
+	 * @return a set of reservations of a specific customer.
+	 * @throws Exception
+	 * @see Reservation
+	 */
 
 	public static Set<Reservation> getReservationMadeByCustomer(Customer customer) throws Exception {
 		c = null;
@@ -86,8 +116,8 @@ public class ReservationDB {
 
 			String cust = customerQ.getString("userName");
 			String pw = customerQ.getString("pw");
-			
-			Customer userName = new Customer(cust, pw,Role.valueOf(customerQ.getString("rights")));
+
+			Customer userName = new Customer(cust, pw, Role.valueOf(customerQ.getString("rights")));
 
 			reservations.add(new Reservation(startTime, endTime, resource, userName));
 
@@ -100,6 +130,13 @@ public class ReservationDB {
 		return reservations;
 	}
 
+	/**
+	 * Returns all reservations in the database.
+	 * 
+	 * @return a set of reservations.
+	 * @throws Exception
+	 * @see Reservation
+	 */
 	public static Set<Reservation> getReservations() throws Exception {
 
 		Set<Reservation> reservations = new HashSet<>();
