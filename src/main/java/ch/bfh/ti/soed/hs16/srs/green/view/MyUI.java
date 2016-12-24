@@ -133,8 +133,8 @@ public class MyUI extends UI {
 			int roomSize = 12;
 			Button addRoom = new Button("Add Room");
 			Button removeRoom = new Button("Remove Room");
-			TextField roomField = new TextField("Room to add/remove, size will be 12 at adding");
-			TextField locationField = new TextField("Location to add/remove");
+			TextField roomField = new TextField("Room to add, size will be 12\nTo remove select a row in the table.");
+			TextField locationField = new TextField("Location");
 			try {
 				if (controller.getCustomer(userName.getValue()).getRole().equals(Role.ROOMMANAGER)) {
 					addComponent(roomField, 4, 5);
@@ -159,10 +159,9 @@ public class MyUI extends UI {
 			for (Resource r : resources)
 				table.addItem(new Object[] { r.getName(), r.getLocation(), r.getSize() }, b++);
 
-			System.out.println("addcomponent");
 			table.setSelectable(true);
 			table.setImmediate(true);
-			table.addListener(new ItemClickListener() {
+			table.addItemClickListener(new ItemClickListener() {
 				@Override
 				public void itemClick(ItemClickEvent event) {
 					@SuppressWarnings("rawtypes")
@@ -174,6 +173,18 @@ public class MyUI extends UI {
 					r = (String) roomNameP.getValue();
 					l = (String) locationP.getValue();
 					s = (int) sizeP.getValue();
+
+					removeRoom.addClickListener(ae -> {
+						try {
+							if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
+								controller.deleteRessource(roomField.getValue(), locationField.getValue());
+								table.removeItem(event.getItemId());
+
+							}
+						} catch (Throwable e) {
+							e.printStackTrace();
+						}
+					});
 
 				}
 			});
@@ -245,17 +256,6 @@ public class MyUI extends UI {
 					if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
 						controller.addRessource(roomField.getValue(), locationField.getValue(), roomSize);
 						table.addItem(new Object[] { roomField.getValue(), locationField.getValue(), roomSize }, b++);
-					}
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
-			});
-			removeRoom.addClickListener(ae -> {
-				try {
-					if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
-						controller.deleteRessource(roomField.getValue(), locationField.getValue());
-
-						table.removeItem(new Object[] { roomField.getValue(), locationField.getValue(), roomSize });
 					}
 				} catch (Throwable e) {
 					e.printStackTrace();
