@@ -9,11 +9,10 @@ package ch.bfh.ti.soed.hs16.srs.green.model;
 
 import java.time.LocalDateTime;
 
-///**
-// * Class Reservation which handles one reservation and which has all data of one
-// * (this) reservation.
-// * @author team-green
-// */
+/**
+ * A model class which instances represent reservations of a room
+ * @author team green
+ */
 public class Reservation {
 
 	private LocalDateTime startTime, endTime;
@@ -21,13 +20,18 @@ public class Reservation {
 	private Resource resource;
 	private Customer customer;
 
-//	/**
-//	 * Constructor which initialize all necessary data for a reservation.
-//	 * @param startTime
-//	 * @param endTime
-//	 * @param resource
-//	 * @param customer
-//	 */
+
+	/**
+	 * constructor of the class
+	 * @param startTime
+	 * 		the time when the reservation of the resource starts
+	 * @param endTime
+	 * 		the time when the reservation of the resource ends
+	 * @param resource
+	 * 		the reserved resource
+	 * @param customer
+	 * 		the customer / "owner" of the reservation
+	 */
 	public Reservation(LocalDateTime startTime, LocalDateTime endTime, Resource resource, Customer customer) {
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -36,65 +40,80 @@ public class Reservation {
 
 	}
 
-//	/**
-//	 * Method returns the Customer which made this Reservation.
-//	 * @return
-//	 */
+	/**
+	 * getCustomer method
+	 * @return customer
+	 * 		the customer / "owner" of the reservation
+	 */
 	public Customer getCustomer() {
 		return customer;
 	}
-//
-//	/**
-//	 * Returns the Date and the End-Time of this Reservation.
-//	 * @return
-//	 */
+
+
+	/**
+	 * getEndTime method
+	 * @return endTime
+	 * 		the end time of the reservation
+	 */
 	public LocalDateTime getEndTime() {
 		return endTime;
 	}
-//
-//	/**
-//	 * returns the Resource(Room) of this Reservation.
-//	 * @return
-//	 */
+
+	/**
+	 * getResource method
+	 * @return resource
+	 * 		the reserved resource
+	 */
 	public Resource getResource() {
 		return resource;
 	}
 
-//	/**
-//	 * Returns the Date and the Start-Time of this Reservation.
-//	 * @return
-//	 */
+	/**
+	 * getStartTime method
+	 * @return startTime
+	 * 		the start time of the reservation
+	 */
 	public LocalDateTime getStartTime() {
 		return startTime;
 	}
-//	/**
-//	 * Sets the given Customer to this reservation.
-//	 * @param endTime
-//	 */
+
+	/**
+	 * setCustomer method
+	 * @param customer
+	 * 		the new customer, should not be null or empty
+	 * this method sets the customer
+	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
-//	/**
-//	 * Sets the end Time to this reservation.
-//	 * @param endTime
-//	 */
+	/**
+	 * setEndTime method
+	 *
+	 * @param endTime
+	 * 		the new end time, should not be null or empty and "bigger" than endTime
+	 * this method sets the EndTime
+	 */
 	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 
-//	/**
-//	 * Sets the given Resource to this Reservation.
-//	 * @param resource
-//	 */
+	/**
+	 * setResource method
+	 * @param resource
+	 * 		the new resource, should not be null or empty
+	 * this method sets the resource
+	 */
 	public void setResource(Resource resource) {
 		this.resource = resource;
 	}
 
-//	/**
-//	 * Sets the given StartTime to this Reservation.
-//	 * @param startTime
-//	 */
+	/**
+	 * setStartTime method
+	 * @param startTime
+	 * 		the new startTime, should not be null or empty and "smaller" than endTime
+	 * this method sets the startTime
+	 */
 	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
