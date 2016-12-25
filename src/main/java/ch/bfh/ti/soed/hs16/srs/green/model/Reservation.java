@@ -23,7 +23,6 @@ public class Reservation {
 
 //	/**
 //	 * Constructor which initialize all necessary data for a reservation.
-//	 * 
 //	 * @param startTime
 //	 * @param endTime
 //	 * @param resource

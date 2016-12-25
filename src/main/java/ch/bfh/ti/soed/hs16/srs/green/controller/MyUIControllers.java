@@ -20,7 +20,6 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 /**
  * Only class which controls the database srs.db
- * 
  * @author team-green
  */
 public class MyUIControllers {
@@ -39,7 +38,6 @@ public class MyUIControllers {
 
 	/**
 	 * Constructor which gets all the customers and resources from the database.
-	 * 
 	 * @throws Throwable
 	 */
 	public MyUIControllers() throws Throwable {
@@ -51,7 +49,6 @@ public class MyUIControllers {
 
 	/**
 	 * Method registers a customer with given user name and password.
-	 * 
 	 * @param userName
 	 *            specific user name from UI text field username.
 	 * @param pw
@@ -83,7 +80,6 @@ public class MyUIControllers {
 
 	/**
 	 * Method checks if the password and user name is correct.
-	 * 
 	 * @param userName
 	 * @param pw
 	 * @return true if login-data are correct, otherwise false
@@ -111,7 +107,6 @@ public class MyUIControllers {
 
 	/**
 	 * Method which returns the number of available Rooms in the database.
-	 * 
 	 * @return the number of rooms
 	 * @throws Throwable
 	 * @see Resource
@@ -123,7 +118,6 @@ public class MyUIControllers {
 
 	/**
 	 * Methods adds resource to the resources-table.
-	 * 
 	 * @param roomName
 	 *            specific room name
 	 * @param location
@@ -140,7 +134,6 @@ public class MyUIControllers {
 
 	/**
 	 * Methods which deletes desired resource
-	 * 
 	 * @param roomName
 	 *            specific room
 	 * @param location
@@ -155,7 +148,6 @@ public class MyUIControllers {
 	/**
 	 * Methods which adds a Reservation to the database at a specific time,
 	 * date, in a specific room, of a specific customer.
-	 * 
 	 * @param startTime
 	 * @param endTime
 	 * @param resource
@@ -171,7 +163,6 @@ public class MyUIControllers {
 
 	/**
 	 * Method which returns all reservation made by a specific Customer.
-	 * 
 	 * @param c
 	 *            Customer, of which all the reservation will be returned.
 	 * @return a set of Reservations.
@@ -186,7 +177,6 @@ public class MyUIControllers {
 	/**
 	 * Method which checks if a reservation is possible in the given room at the
 	 * specific start and end time.
-	 * 
 	 * @param start
 	 *            specific start time of the requested reservation.
 	 * @param end

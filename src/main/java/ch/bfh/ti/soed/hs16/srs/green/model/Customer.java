@@ -30,8 +30,7 @@ public class Customer {
 	}
 
 //	/**
-//	 * Method checks if the given password is correct with the actually password
-//	 * of the customer. 
+//	 * Method checks if the given password is correct with the actually password of the customer.
 //	 * @param pwToCheck
 //	 * @return
 //	 */
