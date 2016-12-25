@@ -45,7 +45,6 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Role;
  * This UI is the application entry point. The UI exists of a Login-View and a
  * Reservation-View. The class uses MyUIController for sending and receiving
  * data of the database.
- * 
  * @see MyUIControllers
  */
 @SuppressWarnings("serial")
@@ -70,7 +69,6 @@ public class MyUI extends UI {
 	/**
 	 * Class which creates the reservation-window, the one, after the login. The
 	 * UI is build with a Grid Layout.
-	 * 
 	 * @author team-green
 	 * @see GridLayout
 	 */
