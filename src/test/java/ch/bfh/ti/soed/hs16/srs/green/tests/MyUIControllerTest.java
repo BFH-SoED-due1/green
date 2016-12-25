@@ -51,7 +51,7 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		MyUIControllers mc = new MyUIControllers();
 		disconnectDB();
-		mc.register("Test", "testpW",Role.CUSTOMER);
+		mc.register("Test", "testpW", Role.CUSTOMER);
 
 	}
 
@@ -61,8 +61,8 @@ public class MyUIControllerTest {
 		connectDB();
 		deleteContentOfTables();
 		disconnectDB();
-		CustomerDB.registerCustomer("MarcoM234", "testPW123",Role.CUSTOMER);
-		CustomerDB.registerCustomer("MarcoM5", "testPW",Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM234", "testPW123", Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM5", "testPW", Role.CUSTOMER);
 		MyUIControllers mc = new MyUIControllers();
 		assertNull(mc.getCustomer("MarcoM3"));
 	}
@@ -72,8 +72,8 @@ public class MyUIControllerTest {
 		connectDB();
 		deleteContentOfTables();
 		disconnectDB();
-		CustomerDB.registerCustomer("MarcoM234", "testPW123",Role.CUSTOMER);
-		CustomerDB.registerCustomer("MarcoM5", "testPW",Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM234", "testPW123", Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM5", "testPW", Role.CUSTOMER);
 		MyUIControllers mc = new MyUIControllers();
 		assertNotNull(mc.getCustomer("MarcoM5"));
 	}
@@ -84,7 +84,7 @@ public class MyUIControllerTest {
 		connectDB();
 		deleteContentOfTables();
 		disconnectDB();
-		CustomerDB.registerCustomer("MarcoM", "testPW",Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM", "testPW", Role.CUSTOMER);
 		MyUIControllers mc = new MyUIControllers();
 		assertFalse(mc.login("MarcoM", "testPWfalsch"));
 	}
@@ -95,7 +95,7 @@ public class MyUIControllerTest {
 		connectDB();
 		deleteContentOfTables();
 		disconnectDB();
-		CustomerDB.registerCustomer("MarcoM", "testPW",Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM", "testPW", Role.CUSTOMER);
 		MyUIControllers mc = new MyUIControllers();
 		assertFalse(mc.login("MarcoMFalsch", "testPW"));
 	}
@@ -106,7 +106,7 @@ public class MyUIControllerTest {
 		connectDB();
 		deleteContentOfTables();
 		disconnectDB();
-		CustomerDB.registerCustomer("MarcoM", "testPW",Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM", "testPW", Role.CUSTOMER);
 		MyUIControllers mc = new MyUIControllers();
 		assertTrue(mc.login("MarcoM", "testPW"));
 	}
@@ -118,10 +118,10 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
 		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 14, 30);
@@ -140,10 +140,10 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
 		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 14, 30);
@@ -179,6 +179,7 @@ public class MyUIControllerTest {
 		MyUIControllers mc = new MyUIControllers();
 		mc.addResource("Ro1", "lange", 55);
 	}
+
 	@Test
 	public void removeResourceTest() throws Throwable {
 		connectDB();
@@ -188,16 +189,17 @@ public class MyUIControllerTest {
 		mc.addResource("Ro1", "lange", 55);
 		mc.deleteResource("Ro1", "lange");
 	}
+
 	@Test
 	public void isAvailableTestNotSameRoom() throws Throwable {
 		connectDB();
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
 		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 14, 30);
@@ -221,10 +223,10 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
@@ -249,10 +251,10 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
 		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 14, 30);
@@ -272,10 +274,10 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
 		LocalDateTime start2 = LocalDateTime.of(2018, 12, 12, 11, 30);
@@ -294,10 +296,10 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
 		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 14, 30);
@@ -318,10 +320,10 @@ public class MyUIControllerTest {
 		deleteContentOfTables();
 		disconnectDB();
 
-		CustomerDB.registerCustomer("SvenTest", "testpw",Role.CUSTOMER);
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 
-		Customer u1 = new Customer("SvenTest", "testpw",Role.CUSTOMER);
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
 		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
 		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
 		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 14, 30);
@@ -333,5 +335,75 @@ public class MyUIControllerTest {
 		mc.isAvailable(start2, end2, res); // throws exception;
 
 	}
+
+	@Test
+	public void isAvailableEndBetweenTimeTwo() throws Throwable {
+
+		connectDB();
+		deleteContentOfTables();
+		disconnectDB();
+
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
+		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
+
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
+		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
+		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
+		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 15, 30);
+		LocalDateTime start2 = LocalDateTime.of(2018, 12, 12, 11, 30);
+		LocalDateTime end2 = LocalDateTime.of(2018, 12, 12, 10, 30);
+
+		ReservationDB.addReservation(start, end, res, u1);
+		MyUIControllers mc = new MyUIControllers();
+		mc.isAvailable(start2, end2, res); // throws exception;
+
+	}
+	
+	@Test
+	public void isAvailableEndBetweenTimeThree() throws Throwable {
+
+		connectDB();
+		deleteContentOfTables();
+		disconnectDB();
+
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
+		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
+
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
+		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
+		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
+		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 15, 30);
+		LocalDateTime start2 = LocalDateTime.of(2018, 12, 12, 17, 30);
+		LocalDateTime end2 = LocalDateTime.of(2018, 12, 12, 10, 30);
+
+		ReservationDB.addReservation(start, end, res, u1);
+		MyUIControllers mc = new MyUIControllers();
+		mc.isAvailable(start2, end2, res); // throws exception;
+
+	}
+	
+	@Test
+	public void isAvailableStartBetweenTimeThree() throws Throwable {
+
+		connectDB();
+		deleteContentOfTables();
+		disconnectDB();
+
+		CustomerDB.registerCustomer("SvenTest", "testpw", Role.CUSTOMER);
+		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
+
+		Customer u1 = new Customer("SvenTest", "testpw", Role.CUSTOMER);
+		Resource res = new Resource("RoomTest2", 44, "RoomLocationTest2");
+		LocalDateTime start = LocalDateTime.of(2018, 12, 12, 12, 30);
+		LocalDateTime end = LocalDateTime.of(2018, 12, 12, 15, 30);
+		LocalDateTime start2 = LocalDateTime.of(2018, 12, 12, 17, 30);
+		LocalDateTime end2 = LocalDateTime.of(2018, 12, 12, 17, 30);
+
+		ReservationDB.addReservation(start, end, res, u1);
+		MyUIControllers mc = new MyUIControllers();
+		mc.isAvailable(start2, end2, res); // throws exception;
+
+	}
+
 
 }
