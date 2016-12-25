@@ -7,57 +7,60 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.model;
 
-///**
-// * Class Customer which represent the client of the srs-tool.
-// * @author team-green
-// */
+/**
+ * A model class which instances represent customers
+ * @author team green
+ *
+ */
 public class Customer {
 
 	private final Role rights;
 	private String userName, pw;
 
-//	/**
-//	 * Constructor of Customer, needs a user name, a password as well as a role
-//	 * to initialize the Customer himself.
-//	 * @param userName
-//	 * @param pw
-//	 * @param role
-//	 */
+	/**
+	 * Constructor of the class
+	 * @param userName the username of the customer, should not be null or empty
+	 * @param pw the password of the customer, should not be null or empty
+	 * @param role the role of the customer (customer or room manager), should not be null or empty
+	 */
 	public Customer(String userName, String pw, Role role) {
 		this.userName = userName;
 		this.pw = pw;
-		this.rights = role;
+		rights=role;
 	}
 
-//	/**
-//	 * Method checks if the given password is correct with the actually password of the customer.
-//	 * @param pwToCheck
-//	 * @return
-//	 */
+	/**
+	 * checkPW method to check if the pwToCheck is the same as the pw of this object
+	 * @param pwToCheck given pw
+	 * @return true if pwToCheck is the same
+	 */
 	public boolean checkPW(String pwToCheck) {
 		return pw.equals(pwToCheck);
 	}
 
-//	/**
-//	 * Method returns the user name of this customer.
-//	 * @return
-//	 */
+	/**
+	 * getUsername method
+	 * @return userName
+	 * 	name of the customer
+	 */
 	public String getUserName() {
 		return userName;
 	}
 
-//	/**
-//	 * Method sets the user name of this customer.
-//	 * @param userName
-//	 */
+	/**
+	 * setUsername method
+	 * @param userName the new userName, should not be null or empty
+	 * this method sets the new userName
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-//	/**
-//	 * Method returns the Role of this Customer.
-//	 * @return
-//	 */
+	/**
+	 * getRole method
+	 * @return rights
+	 * 		role of the customer (customer, resource manager, admin)
+	 */
 	public Role getRole() {
 		return rights;
 	}
