@@ -17,7 +17,6 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 /**
  * A class which represents the customer table in the srs.db. Class is only used
  * by the class MyUIControllers.
- * 
  * @author team-green
  * @version 1.4, 18.12.16
  */
@@ -25,7 +24,6 @@ public class CustomerDB extends DBConnector {
 
 	/**
 	 * A Method which adds a customer to the table customer in the srs.db
-	 * 
 	 * @param userName
 	 *            takes the username from the UI-TextField username.
 	 * @param pw
@@ -43,7 +41,6 @@ public class CustomerDB extends DBConnector {
 
 	/**
 	 * Returns all customers in the customer table of srs.db.
-	 * 
 	 * @return a set of all customers.
 	 * @throws Exception
 	 * @see Customer

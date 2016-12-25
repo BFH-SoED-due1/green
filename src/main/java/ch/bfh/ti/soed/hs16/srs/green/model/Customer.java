@@ -8,10 +8,10 @@
 package ch.bfh.ti.soed.hs16.srs.green.model;
 
 public class Customer {
-	
+
 	private final Role rights;
 	private String userName, pw;
-	
+
 	public Customer(String userName, String pw, Role role) {
 		this.userName = userName;
 		this.pw = pw;

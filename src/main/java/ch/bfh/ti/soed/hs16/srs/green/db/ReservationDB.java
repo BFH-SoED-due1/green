@@ -20,7 +20,6 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 /**
  * A class which represents the reservations table in the srs.db. Class is only
  * used by the class MyUIControllers.
- * 
  * @author team-green
  * @version 1.4, 18.12.16
  */
@@ -28,7 +27,6 @@ public class ReservationDB extends DBConnector {
 
 	/**
 	 * A method which adds a reservation to the reservations table in srs.db.
-	 * 
 	 * @param startTime
 	 *            At what time the reservation starts.
 	 * @param endTime
@@ -55,7 +53,6 @@ public class ReservationDB extends DBConnector {
 
 	/**
 	 * Returns all reservations made by a specific customer.
-	 * 
 	 * @param customer
 	 *            customer, of which you want to have all reservations.
 	 * @return a set of reservations of a specific customer.
@@ -107,7 +104,6 @@ public class ReservationDB extends DBConnector {
 
 	/**
 	 * Returns all reservations in the database.
-	 * 
 	 * @return a set of reservations.
 	 * @throws Exception
 	 * @see Reservation

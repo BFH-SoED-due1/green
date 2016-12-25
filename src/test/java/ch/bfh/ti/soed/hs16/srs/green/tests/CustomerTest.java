@@ -25,6 +25,12 @@ public class CustomerTest {
 		String pw = "12345";
 		assertFalse(u1.checkPW(pw));
 	}
+	@Test
+	public void getARole() {
+		Customer u1 = new Customer("SvenS", "12AB",Role.CUSTOMER);
+		Role x = u1.getRole();
+		assertNotNull(x);
+	}
 
 	@Test
 	public void checkRhightPwTest() {

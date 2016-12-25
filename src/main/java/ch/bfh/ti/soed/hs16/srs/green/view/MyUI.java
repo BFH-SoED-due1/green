@@ -45,7 +45,6 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Role;
  * This UI is the application entry point. The UI exists of a Login-View and a
  * Reservation-View. The class uses MyUIController for sending and receiving
  * data of the database.
- * 
  * @see MyUIControllers
  */
 @SuppressWarnings("serial")
@@ -70,7 +69,6 @@ public class MyUI extends UI {
 	/**
 	 * Class which creates the reservation-window, the one, after the login. The
 	 * UI is build with a Grid Layout.
-	 * 
 	 * @author team-green
 	 * @see GridLayout
 	 */
@@ -177,7 +175,7 @@ public class MyUI extends UI {
 					removeRoom.addClickListener(ae -> {
 						try {
 							if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
-								controller.deleteRessource(roomField.getValue(), locationField.getValue());
+								controller.deleteResource(roomField.getValue(), locationField.getValue());
 								table.removeItem(event.getItemId());
 
 							}
@@ -254,7 +252,7 @@ public class MyUI extends UI {
 			addRoom.addClickListener(ae -> {
 				try {
 					if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
-						controller.addRessource(roomField.getValue(), locationField.getValue(), roomSize);
+						controller.addResource(roomField.getValue(), locationField.getValue(), roomSize);
 						table.addItem(new Object[] { roomField.getValue(), locationField.getValue(), roomSize }, b++);
 					}
 				} catch (Throwable e) {

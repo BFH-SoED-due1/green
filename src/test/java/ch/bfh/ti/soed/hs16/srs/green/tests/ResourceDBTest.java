@@ -7,8 +7,7 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.tests;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -32,7 +31,15 @@ public class ResourceDBTest {
 		assertNotNull(ResourceDB.getResources());
 
 	}
-
+	@Test(expected = Throwable.class)
+	public void removeResourceTest() throws Throwable {
+		DBConnector.connectDB();
+		DBConnector.delteContentOfTabels();
+		DBConnector.disconnectDB();
+		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
+		ResourceDB.removeResource("RoomTest2", "RoomLocationTest2");
+		assertNull(ResourceDB.getResources());
+	}
 	@Test
 	public void getAmountRoomsTest() throws Throwable {
 		assertTrue(ResourceDB.getAmountRooms() >= 0);
