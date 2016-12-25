@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016 Berner Fachhochschule, Switzerland.
+ *
+ * Project Smart Reservation System.
+ *
+ * Distributable under GPL license. See terms of license at gnu.org.
+ */
 package ch.bfh.ti.soed.hs16.srs.green.db;
 
 import java.sql.Connection;
@@ -5,11 +12,10 @@ import java.sql.DriverManager;
 
 public class DBConnector {
 
-	public static Connection c = null;
+	protected static Connection c = null;
 
 	/**
 	 * Method, which will do the connection to the database.
-	 * 
 	 * @throws Throwable
 	 */
 	public static void connectDB() throws Throwable {
@@ -19,7 +25,6 @@ public class DBConnector {
 
 	/**
 	 * Method, which makes the disconnect to the database.
-	 * 
 	 * @throws Throwable
 	 */
 	public static void disconnectDB() throws Throwable {
@@ -29,7 +34,6 @@ public class DBConnector {
 	/**
 	 * Deletes all the content of the tables in the srs.db - mostly neede for
 	 * the test classes.
-	 * 
 	 * @throws Throwable
 	 */
 	public static void delteContentOfTabels() throws Throwable {
