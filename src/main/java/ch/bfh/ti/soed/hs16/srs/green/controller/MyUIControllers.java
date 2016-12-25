@@ -175,7 +175,7 @@ public class MyUIControllers {
 	 * @see Reservation
 	 * @see ReservationDB
 	 */
-	public Set<Reservation> getReservationsMadeByCustomer(Customer c) throws Exception {
+	public Set<Reservation> getReservationsMadeByCustomer(Customer c) throws Throwable {
 		return ReservationDB.getReservationMadeByCustomer(c);
 	}
 	/**
