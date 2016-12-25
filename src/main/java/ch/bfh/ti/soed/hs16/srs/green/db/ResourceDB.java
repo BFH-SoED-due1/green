@@ -7,10 +7,7 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,10 +20,7 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
  * @author team-green
  * @version 1.4, 18.12.16
  */
-public class ResourceDB {
-
-	private static Connection c = null;
-	private static Statement stmt = null;
+public class ResourceDB extends DBConnector {
 
 	/**
 	 * Adds a new Resource/Room to the resources table in the srs.db.
@@ -41,15 +35,11 @@ public class ResourceDB {
 	 */
 	public static void addResource(String roomName, String locatoin, int size) throws Throwable {
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		stmt = c.createStatement();
-
+		connectDB();
 		String sql = "INSERT INTO RESOURCES (ROOMNAME,LOCATION,SIZE) " + "VALUES ('" + roomName + "', '" + locatoin
 				+ "', '" + size + "');";
-		stmt.executeUpdate(sql);
-		stmt.close();
-		c.close();
+		c.createStatement().executeUpdate(sql);
+		disconnectDB();
 
 	}
 
@@ -65,15 +55,10 @@ public class ResourceDB {
 	 */
 	public static void removeResource(String roomName, String locatoin) throws Throwable {
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		stmt = c.createStatement();
-
+		connectDB();
 		String sql = "DELETE FROM RESOURCES WHERE ROOMNAME= '" + roomName + "' AND LOCATION= '" + locatoin + "';";
-		stmt.executeUpdate(sql);
-		stmt.close();
-		c.close();
-
+		c.createStatement().executeUpdate(sql);
+		disconnectDB();
 	}
 
 	/**
@@ -83,14 +68,11 @@ public class ResourceDB {
 	 * @throws Throwable
 	 */
 	public static int getAmountRooms() throws Throwable {
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		stmt = c.createStatement();
+		connectDB();
 		ResultSet rs = c.createStatement().executeQuery("select count (*) AS 'countinho' from resources;");
 		int res = rs.getInt("countinho");
 		rs.close();
-		stmt.close();
-		c.close();
+		disconnectDB();
 		return res;
 	}
 
@@ -102,15 +84,11 @@ public class ResourceDB {
 	 * @see Resource
 	 */
 	public static Set<Resource> getResources() throws Throwable {
-		c = null;
-		stmt = null;
-		Set<Resource> resources = new HashSet<>();
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		c.setAutoCommit(false);
-		stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT ROOMNAME, LOCATION, SIZE FROM RESOURCES;");
+		Set<Resource> resources = new HashSet<>();
+		connectDB();
+		ResultSet rs = c.createStatement().executeQuery("SELECT ROOMNAME, LOCATION, SIZE FROM RESOURCES;");
+
 		while (rs.next()) {
 			String roomName = rs.getString("roomName");
 			String location = rs.getString("location");
@@ -118,9 +96,9 @@ public class ResourceDB {
 			resources.add(new Resource(roomName, size, location));
 
 		}
+
 		rs.close();
-		stmt.close();
-		c.close();
+		disconnectDB();
 		return resources;
 	}
 
