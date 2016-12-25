@@ -53,6 +53,7 @@ public class MyUIControllers {
 	 *            specific user name from UI text field username.
 	 * @param pw
 	 *            specific password from UI text field pw.
+	 * @param x specific Role
 	 * @throws Throwable
 	 */
 	public void register(String userName, String pw, Role x) throws Throwable {
