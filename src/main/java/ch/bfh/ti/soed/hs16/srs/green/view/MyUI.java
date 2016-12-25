@@ -177,7 +177,7 @@ public class MyUI extends UI {
 					removeRoom.addClickListener(ae -> {
 						try {
 							if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
-								controller.deleteRessource(roomField.getValue(), locationField.getValue());
+								controller.deleteResource(roomField.getValue(), locationField.getValue());
 								table.removeItem(event.getItemId());
 
 							}
@@ -254,7 +254,7 @@ public class MyUI extends UI {
 			addRoom.addClickListener(ae -> {
 				try {
 					if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
-						controller.addRessource(roomField.getValue(), locationField.getValue(), roomSize);
+						controller.addResource(roomField.getValue(), locationField.getValue(), roomSize);
 						table.addItem(new Object[] { roomField.getValue(), locationField.getValue(), roomSize }, b++);
 					}
 				} catch (Throwable e) {

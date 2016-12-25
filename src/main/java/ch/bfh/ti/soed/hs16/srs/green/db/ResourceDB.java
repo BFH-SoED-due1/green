@@ -44,13 +44,11 @@ public class ResourceDB {
 		Class.forName("org.sqlite.JDBC");
 		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
 		stmt = c.createStatement();
-
 		String sql = "INSERT INTO RESOURCES (ROOMNAME,LOCATION,SIZE) " + "VALUES ('" + roomName + "', '" + locatoin
 				+ "', '" + size + "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		c.close();
-
 	}
 
 	/**

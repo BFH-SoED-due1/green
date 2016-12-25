@@ -172,14 +172,22 @@ public class MyUIControllerTest {
 	}
 
 	@Test
-	public void addRessourceTest() throws Throwable {
+	public void addResourceTest() throws Throwable {
 		connectDB();
 		deleteContentOfTables();
 		disconnectDB();
 		MyUIControllers mc = new MyUIControllers();
-		mc.addRessource("Ro1", "lange", 55);
+		mc.addResource("Ro1", "lange", 55);
 	}
-
+	@Test
+	public void removeResourceTest() throws Throwable {
+		connectDB();
+		deleteContentOfTables();
+		disconnectDB();
+		MyUIControllers mc = new MyUIControllers();
+		mc.addResource("Ro1", "lange", 55);
+		mc.deleteResource("Ro1", "lange");
+	}
 	@Test
 	public void isAvailableTestNotSameRoom() throws Throwable {
 		connectDB();

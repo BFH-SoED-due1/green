@@ -7,8 +7,7 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.tests;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,7 +37,18 @@ public class ResourceDBTest {
 		assertNotNull(ResourceDB.getResources());
 
 	}
-
+	@Test(expected = Throwable.class)
+	public void removeResourceTest() throws Throwable {
+		Class.forName("org.sqlite.JDBC");
+		Connection c = DriverManager.getConnection("jdbc:sqlite:srs.db");
+		Statement stmt = c.createStatement();
+		stmt.executeUpdate("delete from resources;");
+		stmt.close();
+		c.close();
+		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
+		ResourceDB.removeResource("RoomTest2", "RoomLocationTest2");
+		assertNull(ResourceDB.getResources());
+	}
 	@Test
 	public void getAmountRoomsTest() throws Throwable {
 		assertTrue(ResourceDB.getAmountRooms() >= 0);

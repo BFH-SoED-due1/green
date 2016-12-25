@@ -131,7 +131,7 @@ public class MyUIControllers {
 	 * @see Resource
 	 * @see ResourceDB
 	 */
-	public void addRessource(String roomName, String location, int size) throws Throwable {
+	public void addResource(String roomName, String location, int size) throws Throwable {
 		ResourceDB.addResource(roomName, location, size);
 	}
 
@@ -145,7 +145,7 @@ public class MyUIControllers {
 	 * @throws Throwable
 	 * @see ResourceDB
 	 */
-	public void deleteRessource(String roomName, String location) throws Throwable {
+	public void deleteResource(String roomName, String location) throws Throwable {
 		ResourceDB.removeResource(roomName, location);
 	}
 
