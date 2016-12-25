@@ -15,16 +15,14 @@ import org.junit.Test;
 
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
 
-
 public class ResourceTest {
 
-
 	@Test
-	public void changeAResourcesLocationTest()  {
+	public void changeAResourcesLocationTest() {
 		Resource res = new Resource("R2.1", 20, "Quellweg 21");
 		String loc = res.getLocation();
 		res.setLocation("QW21");
-		assertNotSame(loc,res.getLocation());
+		assertNotSame(loc, res.getLocation());
 	}
 
 	@Test
@@ -32,15 +30,15 @@ public class ResourceTest {
 		Resource res = new Resource("R2.1", 20, "Quellweg 21");
 		String name = res.getName();
 		res.setName("QW21");
-		assertNotSame(name,res.getName());
+		assertNotSame(name, res.getName());
 	}
 
 	@Test
-	public void changeAResourcesSizeTest()  {
+	public void changeAResourcesSizeTest() {
 		Resource res = new Resource("R2.1", 20, "Quellweg 21");
 		int size = res.getSize();
 		res.setSize(25);
-		assertNotSame(size,res.getSize());
+		assertNotSame(size, res.getSize());
 	}
 
 	@Test
@@ -48,13 +46,5 @@ public class ResourceTest {
 		Resource res = new Resource("R1.1", 20, "Quellweg 21");
 		assertNotNull(res);
 	}
-
-	@Test
-	public void twoResourcesTwoUIDTest() {
-		Resource res = new Resource("R2.1", 20, "Quellweg 21");
-		Resource res2 = new Resource("R2.1", 20, "Quellweg 21");
-		assertNotSame(res.getUID(), res2.getUID());
-	}
-
 
 }
