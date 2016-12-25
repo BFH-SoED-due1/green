@@ -16,7 +16,6 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
 /**
  * A class which represents the resources table in the srs.db. Class is only
  * used by the class MyUIControllers.
- * 
  * @author team-green
  * @version 1.4, 18.12.16
  */
@@ -24,7 +23,6 @@ public class ResourceDB extends DBConnector {
 
 	/**
 	 * Adds a new Resource/Room to the resources table in the srs.db.
-	 * 
 	 * @param roomName
 	 *            the specified room name.
 	 * @param locatoin
@@ -44,7 +42,6 @@ public class ResourceDB extends DBConnector {
 
 	/**
 	 * Method removes a specific resource.
-	 * 
 	 * @param roomName
 	 *            specific room name
 	 * @param locatoin
@@ -62,7 +59,6 @@ public class ResourceDB extends DBConnector {
 
 	/**
 	 * Returns the amount of rooms of the resources table.
-	 * 
 	 * @return amount of rooms.
 	 * @throws Throwable
 	 */
@@ -77,7 +73,6 @@ public class ResourceDB extends DBConnector {
 
 	/**
 	 * Returns all resources/rooms of the resources-table.
-	 * 
 	 * @return a set of resource.
 	 * @throws Throwable
 	 * @see Resource
