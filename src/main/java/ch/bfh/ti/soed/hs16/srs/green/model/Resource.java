@@ -7,73 +7,76 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.model;
 
-///**
-// * Class Resource which has all information of a specific Resource.
-// * @author team-green
-// */
+/**
+ * A model class which instances represent resources
+ * @author team green
+ *
+ */
 public class Resource {
 
 	private String name, location;
 	private int size;
 
-//	/**
-//	 * Constructor which initialize all data for a Resource.
-//	 * @param name
-//	 * @param size
-//	 * @param location
-//	 */
+	/**
+	 * Constructor of the class
+	 * @param name the name of the resource, should not be null or empty
+	 * @param size the size in "persons" of the resource, should not be null or empty
+	 * @param location the address of the resource, should not be null or empty
+	 */
 	public Resource(String name, int size, String location) {
 
 		this.name = name;
 		this.size = size;
 		this.location = location;
-
 	}
 
-//	/**
-//	 * returns the location of this resource.
-//	 * @return
-//	 */
+	/**
+	 * getLocation method
+	 * @return location of the resource
+	 */
 	public String getLocation() {
 		return location;
 	}
 
-//	/**
-//	 * returns the name of this Resource.
-//	 * @return
-//	 */
+	/**
+	 * getName method
+	 * @return name of the resource
+	 */
 	public String getName() {
 		return name;
 	}
 
-//	/**
-//	 * returns the size of this Resource.
-//	 * @return
-//	 */
+	/**
+	 * getSize method
+	 * @return the size in "persons" of the resource
+	 */
 	public int getSize() {
 		return size;
 	}
 
-//	/**
-//	 * sets the specific location to this Resource.
-//	 * @param location
-//	 */
+	/**
+	 * setLocation method
+	 * @param location the new location or new "description"
+	 * this method sets the location or "description" of this resource
+	 */
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
-//	/**
-//	 * sets the specific name to this Resource.
-//	 * @param name
-//	 */
+	/**
+	 * setName method
+	 * @param name the new name for this resource
+	 * this method sets the name of this resource
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-//	/**
-//	 * sets the specific size to this Resource.
-//	 * @param size
-//	 */
+	/**
+	 * setName method
+	 * @param size the new size for this resource
+	 * this method sets the size of this resource
+	 */
 	public void setSize(int size) {
 		this.size = size;
 	}
