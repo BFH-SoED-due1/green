@@ -7,10 +7,7 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,10 +24,7 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Role;
  * @author team-green
  * @version 1.4, 18.12.16
  */
-public class ReservationDB {
-
-	private static Connection c = null;
-	private static Statement stmt = null;
+public class ReservationDB extends DBConnector {
 
 	/**
 	 * A method which adds a reservation to the reservations table in srs.db.
@@ -46,28 +40,16 @@ public class ReservationDB {
 	 * @throws Exception
 	 */
 	public static void addReservation(LocalDateTime startTime, LocalDateTime endTime, Resource resource,
-			Customer customer) throws Exception {
+			Customer customer) throws Throwable {
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		stmt = c.createStatement();
-
-		Statement forRoomID = c.createStatement();
-
-		ResultSet roIDr = forRoomID.executeQuery("select rowid from resources where location = '"
+		connectDB();
+		ResultSet roIDr = c.createStatement().executeQuery("select rowid from resources where location = '"
 				+ resource.getLocation() + "' and  roomName = '" + resource.getName() + "';");
-
 		int roID = roIDr.getInt("rowid");
-
 		String sql = "INSERT INTO RESERVATIONS (STARTTIME, ENDTIME, ROOMID, USERNAME) " + "VALUES ('" + startTime
 				+ "', '" + endTime + "', '" + roID + "', '" + customer.getUserName() + "');";
-
-		stmt.executeUpdate(sql);
-
-		roIDr.close();
-
-		stmt.close();
-		c.close();
+		c.createStatement().executeUpdate(sql);
+		disconnectDB();
 
 	}
 
@@ -81,17 +63,12 @@ public class ReservationDB {
 	 * @see Reservation
 	 */
 
-	public static Set<Reservation> getReservationMadeByCustomer(Customer customer) throws Exception {
-		c = null;
-		stmt = null;
+	public static Set<Reservation> getReservationMadeByCustomer(Customer customer) throws Throwable {
+
 		Set<Reservation> reservations = new HashSet<>();
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		c.setAutoCommit(false);
-		stmt = c.createStatement();
-
-		ResultSet rs = stmt
+		connectDB();
+		ResultSet rs = c.createStatement()
 				.executeQuery("SELECT STARTTIME, ENDTIME, ROOMID, USERNAME FROM RESERVATIONS WHERE USERNAME = '"
 						+ customer.getUserName() + "';");
 
@@ -124,9 +101,7 @@ public class ReservationDB {
 		}
 
 		rs.close();
-		stmt.close();
-		c.close();
-
+		disconnectDB();
 		return reservations;
 	}
 
@@ -137,12 +112,11 @@ public class ReservationDB {
 	 * @throws Exception
 	 * @see Reservation
 	 */
-	public static Set<Reservation> getReservations() throws Exception {
+	public static Set<Reservation> getReservations() throws Throwable {
 
 		Set<Reservation> reservations = new HashSet<>();
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
+		connectDB();
 
 		ResultSet rs = c.createStatement().executeQuery("SELECT STARTTIME, ENDTIME, ROOMID FROM RESERVATIONS;");
 
@@ -166,7 +140,7 @@ public class ReservationDB {
 			reservations.add(new Reservation(startTime, endTime, resource, null));
 		}
 		rs.close();
-		c.close();
+		disconnectDB();
 		return reservations;
 
 	}
