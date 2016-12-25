@@ -7,10 +7,7 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,10 +21,7 @@ import ch.bfh.ti.soed.hs16.srs.green.model.Role;
  * @author team-green
  * @version 1.4, 18.12.16
  */
-public class CustomerDB {
-
-	private static Connection c = null;
-	private static Statement stmt = null;
+public class CustomerDB extends DBConnector {
 
 	/**
 	 * A Method which adds a customer to the table customer in the srs.db
@@ -38,16 +32,13 @@ public class CustomerDB {
 	 *            takes the password from the UI-TextField password.
 	 * @throws Exception
 	 */
-	public static void registerCustomer(String userName, String pw, Role x) throws Exception {
+	public static void registerCustomer(String userName, String pw, Role x) throws Throwable {
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-
+		connectDB();
 		String sql = "INSERT INTO Customer (USERNAME,PW,RIGHTS) " + "VALUES ('" + userName + "', '" + pw + "', '"
 				+ x.toString() + "');";
 		c.createStatement().executeUpdate(sql);
-
-		c.close();
+		disconnectDB();
 	}
 
 	/**
@@ -57,31 +48,19 @@ public class CustomerDB {
 	 * @throws Exception
 	 * @see Customer
 	 */
-	public static Set<Customer> getCustomers() throws Exception {
+	public static Set<Customer> getCustomers() throws Throwable {
 
-		c = null;
-		stmt = null;
 		Set<Customer> customers = new HashSet<>();
-
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		// c.setAutoCommit(false);
-		stmt = c.createStatement();
-
-		ResultSet rs = stmt.executeQuery("SELECT USERNAME, PW, RIGHTS FROM CUSTOMER;");
+		connectDB();
+		ResultSet rs = c.createStatement().executeQuery("SELECT USERNAME, PW, RIGHTS FROM CUSTOMER;");
 
 		while (rs.next()) {
 			String userName = rs.getString("username");
-
 			String pw = rs.getString("pw");
-
 			customers.add(new Customer(userName, pw, Role.valueOf(rs.getString("rights"))));
 		}
-
 		rs.close();
-		stmt.close();
-		c.close();
-
+		disconnectDB();
 		return customers;
 	}
 
