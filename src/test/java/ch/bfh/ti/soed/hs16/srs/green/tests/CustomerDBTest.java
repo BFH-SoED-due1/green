@@ -7,24 +7,23 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
 
 import ch.bfh.ti.soed.hs16.srs.green.db.CustomerDB;
+import ch.bfh.ti.soed.hs16.srs.green.db.DBConnector;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 public class CustomerDBTest {
 
 	@Test
-	public void testConstructor() throws Exception {
+	public void testConstructor() throws Throwable {
 
 		CustomerDB cdb = new CustomerDB();
 		assertNotNull(cdb);
@@ -32,31 +31,25 @@ public class CustomerDBTest {
 	}
 
 	@Test
-	public void addCustomerTest() throws Exception {
+	public void addCustomerTest() throws Throwable {
 
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		Statement stmt = c.createStatement();
-		stmt.executeUpdate("delete from customer;");
-		stmt.close();
-		c.close();
-		
-		CustomerDB.registerCustomer("MarcoM", "testPW",Role.CUSTOMER);
+		DBConnector.connectDB();
+		DBConnector.delteContentOfTabels();
+		DBConnector.disconnectDB();
+
+		CustomerDB.registerCustomer("MarcoM", "testPW", Role.CUSTOMER);
 		Set<Customer> customer = CustomerDB.getCustomers();
 		assertNotNull(customer);
 
 	}
 
 	@Test
-	public void registerCustomerTest() throws Exception {
-		Class.forName("org.sqlite.JDBC");
-		Connection co = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		Statement stmt = co.createStatement();
-		stmt.executeUpdate("delete from customer;");
-		stmt.close();
-		co.close();
+	public void registerCustomerTest() throws Throwable {
+		DBConnector.connectDB();
+		DBConnector.delteContentOfTabels();
+		DBConnector.disconnectDB();
 
-		CustomerDB.registerCustomer("MarcoM2", "testPW",Role.CUSTOMER);
+		CustomerDB.registerCustomer("MarcoM2", "testPW", Role.CUSTOMER);
 		Set<Customer> customer = CustomerDB.getCustomers();
 		Set<Customer> customerToCheck = new HashSet<>();
 		for (Customer c : customer)
