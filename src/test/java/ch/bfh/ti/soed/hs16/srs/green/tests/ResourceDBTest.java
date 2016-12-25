@@ -10,12 +10,9 @@ package ch.bfh.ti.soed.hs16.srs.green.tests;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-
 import org.junit.Test;
 
+import ch.bfh.ti.soed.hs16.srs.green.db.DBConnector;
 import ch.bfh.ti.soed.hs16.srs.green.db.ResourceDB;
 
 public class ResourceDBTest {
@@ -28,12 +25,9 @@ public class ResourceDBTest {
 
 	@Test
 	public void addResourceTest() throws Throwable {
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		Statement stmt = c.createStatement();
-		stmt.executeUpdate("delete from resources;");
-		stmt.close();
-		c.close();
+		DBConnector.connectDB();
+		DBConnector.delteContentOfTabels();
+		DBConnector.disconnectDB();
 		ResourceDB.addResource("RoomTest2", "RoomLocationTest2", 44);
 		assertNotNull(ResourceDB.getResources());
 
