@@ -28,7 +28,8 @@ public class CustomerDB extends DBConnector {
 	 *            takes the username from the UI-TextField username.
 	 * @param pw
 	 *            takes the password from the UI-TextField password.
-	 * @throws Exception
+	 * @param x
+	 * @throws Throwable
 	 */
 	public static void registerCustomer(String userName, String pw, Role x) throws Throwable {
 
@@ -42,7 +43,7 @@ public class CustomerDB extends DBConnector {
 	/**
 	 * Returns all customers in the customer table of srs.db.
 	 * @return a set of all customers.
-	 * @throws Exception
+	 * @throws Throwable
 	 * @see Customer
 	 */
 	public static Set<Customer> getCustomers() throws Throwable {
