@@ -64,5 +64,4 @@ public class Customer {
 	public Role getRole() {
 		return rights;
 	}
-
 }

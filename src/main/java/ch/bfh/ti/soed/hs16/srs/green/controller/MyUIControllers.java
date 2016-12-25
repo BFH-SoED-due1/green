@@ -63,7 +63,7 @@ public class MyUIControllers {
 
 	/**
 	 * Method gets the Object-Customer from the given user name.
-	 * 
+	 *
 	 * @param userName
 	 * @return returns customer of the specific user name.
 	 * @see Customer
@@ -97,7 +97,6 @@ public class MyUIControllers {
 
 	/**
 	 * Method which returns all resources in the database.
-	 * 
 	 * @return a set of resources.
 	 * @see Resource
 	 */
