@@ -11,8 +11,8 @@ Backlog (BL)
   Dieses Dokument beschreibt den Product/Sprint Backlog von Team Grün.
   Die Aufwandschätzung der einzelnen Tasks oder Stories wird mit "Story Point"s am Ende der Zeile dargestellt.
   Story Point's sollen nicht die geschätzten Stundenanzahl angeben sondern die "Komplexität/Aufwand" der Aufgabe im Verhältnis zu den anderen darstellen.
-  
- 
+  Pro Story Point rechnen wir mit 3 Stunden und 17 Minuten (gemessen an kleinem Task).  
+
   Symbolerklärung:
   
 [images/BLS1.png] Symbole1
@@ -69,4 +69,4 @@ Backlog (BL)
 
 * 11. Applied time for a task
 
-	For a task (Diagrams) we had to invest 2 hours and 17 minutes.
+	
