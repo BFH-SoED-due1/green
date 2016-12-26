@@ -73,7 +73,7 @@ public class MyUI extends UI {
 	 * @see GridLayout
 	 */
 	public class ReservationUI extends GridLayout {
-		private int b;
+		private int count;
 
 		/**
 		 * Constructor creates GridLayout with size nine columns and 6 rows.
@@ -153,9 +153,9 @@ public class MyUI extends UI {
 			table.addContainerProperty("Location", String.class, null);
 			table.addContainerProperty("Size", Integer.class, null);
 
-			b = 1;
+			count = 1;
 			for (Resource r : resources)
-				table.addItem(new Object[] { r.getName(), r.getLocation(), r.getSize() }, b++);
+				table.addItem(new Object[] { r.getName(), r.getLocation(), r.getSize() }, count++);
 
 			table.setSelectable(true);
 			table.setImmediate(true);
@@ -253,7 +253,7 @@ public class MyUI extends UI {
 				try {
 					if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
 						controller.addResource(roomField.getValue(), locationField.getValue(), roomSize);
-						table.addItem(new Object[] { roomField.getValue(), locationField.getValue(), roomSize }, b++);
+						table.addItem(new Object[] { roomField.getValue(), locationField.getValue(), roomSize }, count++);
 					}
 				} catch (Throwable e) {
 					e.printStackTrace();
@@ -309,8 +309,8 @@ public class MyUI extends UI {
 			System.out.println(userName.getValue());
 			System.out.println(password.getValue());
 			try {
-				if ((controller.login(userName.getValue(), password.getValue()))
-						|| (userName.equals(userName.getValue()) && password.equals(password.getValue()))) {
+				if (controller.login(userName.getValue(), password.getValue())
+						|| userName.equals(userName.getValue()) && password.equals(password.getValue())) {
 					setContent(new ReservationUI());
 				}
 			} catch (Throwable e1) {
