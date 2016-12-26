@@ -10,7 +10,7 @@ package ch.bfh.ti.soed.hs16.srs.green.model;
 import java.time.LocalDateTime;
 
 /**
- * A model class which instances represent reservations of a room
+ * A model class which instances represent reservations of a resource
  * @author team green
  */
 public class Reservation {
