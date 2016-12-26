@@ -1,0 +1,16 @@
+    ----------
+    A-I-Graph
+    ----------
+    wthv1
+    ----------
+    December 25, 2016
+
+A-I-Graph
+
+	Green point = yellow and blue point together
+	
+	Bemerkungen: A-I-Graph ist nicht optimal. Es wurde nicht abstrahiert. 
+	In einem nächsten Projekt werden wir das SOLID besser beachten mit Hilfe von Interfaces oder abstrakten Klassen. 
+
+
+[images/AIGRAPH.png] AIGRAPH

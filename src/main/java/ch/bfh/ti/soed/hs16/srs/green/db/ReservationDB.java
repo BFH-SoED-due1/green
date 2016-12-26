@@ -7,10 +7,7 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,50 +15,57 @@ import java.util.Set;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
-public class ReservationDB {
+/**
+ * A class which represents the reservations table in the srs.db. Class is only
+ * used by the class MyUIControllers.
+ * @author team-green
+ * @version 1.4, 18.12.16
+ */
+public class ReservationDB extends DBConnector {
 
-	private static Connection c = null;
-	private static Statement stmt = null;
-
+	/**
+	 * A method which adds a reservation to the reservations table in srs.db.
+	 * @param startTime
+	 *            At what time the reservation starts.
+	 * @param endTime
+	 *            At what time the reservation ends.
+	 * @param resource
+	 *            In which room the reservation is.
+	 * @param customer
+	 *            Which customer made the reservation.
+	 * @throws Exception
+	 */
 	public static void addReservation(LocalDateTime startTime, LocalDateTime endTime, Resource resource,
-			Customer customer) throws Exception {
+			Customer customer) throws Throwable {
 
-		Class.forName("org.sqlite.JDBC");
-		System.out.println("FORNAME");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		stmt = c.createStatement();
-
-		Statement forRoomID = c.createStatement();
-
-		ResultSet roIDr = forRoomID.executeQuery("select rowid from resources where location = '"
+		connectDB();
+		ResultSet roIDr = c.createStatement().executeQuery("select rowid from resources where location = '"
 				+ resource.getLocation() + "' and  roomName = '" + resource.getName() + "';");
-
 		int roID = roIDr.getInt("rowid");
-
 		String sql = "INSERT INTO RESERVATIONS (STARTTIME, ENDTIME, ROOMID, USERNAME) " + "VALUES ('" + startTime
 				+ "', '" + endTime + "', '" + roID + "', '" + customer.getUserName() + "');";
-
-		stmt.executeUpdate(sql);
-
-		roIDr.close();
-
-		stmt.close();
-		c.close();
+		c.createStatement().executeUpdate(sql);
+		disconnectDB();
 
 	}
 
-	public static Set<Reservation> getReservationMadeByCustomer(Customer customer) throws Exception {
-		c = null;
-		stmt = null;
+	/**
+	 * Returns all reservations made by a specific customer.
+	 * @param customer
+	 *            customer, of which you want to have all reservations.
+	 * @return a set of reservations of a specific customer.
+	 * @throws Exception
+	 * @see Reservation
+	 */
+
+	public static Set<Reservation> getReservationMadeByCustomer(Customer customer) throws Throwable {
+
 		Set<Reservation> reservations = new HashSet<>();
 
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		c.setAutoCommit(false);
-		stmt = c.createStatement();
-
-		ResultSet rs = stmt
+		connectDB();
+		ResultSet rs = c.createStatement()
 				.executeQuery("SELECT STARTTIME, ENDTIME, ROOMID, USERNAME FROM RESERVATIONS WHERE USERNAME = '"
 						+ customer.getUserName() + "';");
 
@@ -87,17 +91,54 @@ public class ReservationDB {
 			String cust = customerQ.getString("userName");
 			String pw = customerQ.getString("pw");
 
-			Customer userName = new Customer(cust, pw);
+			Customer userName = new Customer(cust, pw, Role.valueOf(customerQ.getString("rights")));
 
 			reservations.add(new Reservation(startTime, endTime, resource, userName));
 
 		}
 
 		rs.close();
-		stmt.close();
-		c.close();
-
+		disconnectDB();
 		return reservations;
+	}
+
+	/**
+	 * Returns all reservations in the database.
+	 * @return a set of reservations.
+	 * @throws Exception
+	 * @see Reservation
+	 */
+	public static Set<Reservation> getReservations() throws Throwable {
+
+		Set<Reservation> reservations = new HashSet<>();
+
+		connectDB();
+
+		ResultSet rs = c.createStatement().executeQuery("SELECT STARTTIME, ENDTIME, ROOMID FROM RESERVATIONS;");
+
+		while (rs.next()) {
+
+			LocalDateTime startTime = LocalDateTime.parse(rs.getString("startTime"));
+			LocalDateTime endTime = LocalDateTime.parse(rs.getString("endTime"));
+
+			int roomID1 = rs.getInt("roomid");
+
+			ResultSet resourceQ = c.createStatement()
+					.executeQuery("SELECT * FROM RESOURCES WHERE ROWID = " + roomID1 + ";");
+
+			String roomN = resourceQ.getString("roomName");
+			String loc = resourceQ.getString("location");
+
+			int size = resourceQ.getInt("size");
+
+			Resource resource = new Resource(roomN, size, loc);
+
+			reservations.add(new Reservation(startTime, endTime, resource, null));
+		}
+		rs.close();
+		disconnectDB();
+		return reservations;
+
 	}
 
 }

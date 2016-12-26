@@ -7,56 +7,58 @@
  */
 package ch.bfh.ti.soed.hs16.srs.green.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
-public class CustomerDB {
+/**
+ * A class which represents the customer table in the srs.db. Class is only used
+ * by the class MyUIControllers.
+ * @author team-green
+ * @version 1.4, 18.12.16
+ */
+public class CustomerDB extends DBConnector {
 
-	private static Connection c = null;
-	private static Statement stmt = null;
+	/**
+	 * A Method which adds a customer to the table customer in the srs.db
+	 * @param userName
+	 *            takes the username from the UI-TextField username.
+	 * @param pw
+	 *            takes the password from the UI-TextField password.
+	 * @param x
+	 * @throws Throwable
+	 */
+	public static void registerCustomer(String userName, String pw, Role x) throws Throwable {
 
-	public static void registerCustomer(String userName, String pw) throws Exception {
-
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-
-		String sql = "INSERT INTO Customer (USERNAME,PW) " + "VALUES ('" + userName + "', '" + pw + "');";
-
+		connectDB();
+		String sql = "INSERT INTO Customer (USERNAME,PW,RIGHTS) " + "VALUES ('" + userName + "', '" + pw + "', '"
+				+ x.toString() + "');";
 		c.createStatement().executeUpdate(sql);
-
-		c.close();
+		disconnectDB();
 	}
 
-	public static Set<Customer> getCustomers() throws Exception {
+	/**
+	 * Returns all customers in the customer table of srs.db.
+	 * @return a set of all customers.
+	 * @throws Throwable
+	 * @see Customer
+	 */
+	public static Set<Customer> getCustomers() throws Throwable {
 
-		c = null;
-		stmt = null;
 		Set<Customer> customers = new HashSet<>();
-
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:srs.db");
-		c.setAutoCommit(false);
-		stmt = c.createStatement();
-
-		ResultSet rs = stmt.executeQuery("SELECT USERNAME, PW FROM CUSTOMER;");
+		connectDB();
+		ResultSet rs = c.createStatement().executeQuery("SELECT USERNAME, PW, RIGHTS FROM CUSTOMER;");
 
 		while (rs.next()) {
 			String userName = rs.getString("username");
-
 			String pw = rs.getString("pw");
-			customers.add(new Customer(userName, pw));
+			customers.add(new Customer(userName, pw, Role.valueOf(rs.getString("rights"))));
 		}
-
 		rs.close();
-		stmt.close();
-		c.close();
-
+		disconnectDB();
 		return customers;
 	}
 

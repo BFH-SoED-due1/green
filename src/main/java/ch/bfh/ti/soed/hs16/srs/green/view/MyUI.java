@@ -20,6 +20,7 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -38,15 +39,13 @@ import ch.bfh.ti.soed.hs16.srs.green.controller.MyUIControllers;
 import ch.bfh.ti.soed.hs16.srs.green.model.Customer;
 import ch.bfh.ti.soed.hs16.srs.green.model.Reservation;
 import ch.bfh.ti.soed.hs16.srs.green.model.Resource;
+import ch.bfh.ti.soed.hs16.srs.green.model.Role;
 
 /**
- * This UI is the application entry point. A UI may either represent a browser
- * window (or tab) or some part of a html page where a Vaadin application is
- * embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is
- * intended to be overridden to add component to the user interface and
- * initialize non-component functionality.
+ * This UI is the application entry point. The UI exists of a Login-View and a
+ * Reservation-View. The class uses MyUIController for sending and receiving
+ * data of the database.
+ * @see MyUIControllers
  */
 @SuppressWarnings("serial")
 @Theme("mytheme")
@@ -67,14 +66,26 @@ public class MyUI extends UI {
 	public static class MyUIServlet extends VaadinServlet {
 	}
 
+	/**
+	 * Class which creates the reservation-window, the one, after the login. The
+	 * UI is build with a Grid Layout.
+	 * @author team-green
+	 * @see GridLayout
+	 */
 	public class ReservationUI extends GridLayout {
+		private int count;
 
+		/**
+		 * Constructor creates GridLayout with size nine columns and 6 rows.
+		 */
 		ReservationUI() {
 			super(9, 6);
 			createWindow();
-
 		}
 
+		/**
+		 * Method which actually creates the content of the Reservation View.
+		 */
 		@SuppressWarnings("deprecation")
 		public void createWindow() {
 
@@ -117,6 +128,24 @@ public class MyUI extends UI {
 			addComponent(getReservations, 6, 4);
 			getReservations.setStyleName(Reindeer.BUTTON_SMALL);
 
+			int roomSize = 12;
+			Button addRoom = new Button("Add Room");
+			Button removeRoom = new Button("Remove Room");
+			TextField roomField = new TextField("Room to add, size will be 12\nTo remove select a row in the table.");
+			TextField locationField = new TextField("Location");
+			try {
+				if (controller.getCustomer(userName.getValue()).getRole().equals(Role.ROOMMANAGER)) {
+					addComponent(roomField, 4, 5);
+					addComponent(locationField, 6, 5);
+					addComponent(addRoom, 7, 5);
+					addComponent(removeRoom, 8, 5);
+				}
+			} catch (Throwable e1) {
+
+				e1.printStackTrace();
+			}
+			;
+
 			Set<Resource> resources = controller.getResources();
 
 			Table table = new Table("Please choose Room for Reservation");
@@ -124,13 +153,13 @@ public class MyUI extends UI {
 			table.addContainerProperty("Location", String.class, null);
 			table.addContainerProperty("Size", Integer.class, null);
 
-			int b = 1;
+			count = 1;
 			for (Resource r : resources)
-				table.addItem(new Object[] { r.getName(), r.getLocation(), r.getSize() }, b++);
-			System.out.println("addcomponent");
+				table.addItem(new Object[] { r.getName(), r.getLocation(), r.getSize() }, count++);
+
 			table.setSelectable(true);
 			table.setImmediate(true);
-			table.addListener(new ItemClickListener() {
+			table.addItemClickListener(new ItemClickListener() {
 				@Override
 				public void itemClick(ItemClickEvent event) {
 					@SuppressWarnings("rawtypes")
@@ -142,6 +171,18 @@ public class MyUI extends UI {
 					r = (String) roomNameP.getValue();
 					l = (String) locationP.getValue();
 					s = (int) sizeP.getValue();
+
+					removeRoom.addClickListener(ae -> {
+						try {
+							if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
+								controller.deleteResource(roomField.getValue(), locationField.getValue());
+								table.removeItem(event.getItemId());
+
+							}
+						} catch (Throwable e) {
+							e.printStackTrace();
+						}
+					});
 
 				}
 			});
@@ -155,15 +196,21 @@ public class MyUI extends UI {
 				int year = Integer.parseInt(dateS.substring(24));
 
 				try {
-					controller.makeReservation(
-
+					if (controller.isAvailable(
 							LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
 									Integer.parseInt(fromHrs.getValue()), Integer.parseInt(fromMin.getValue())),
 							LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
 									Integer.parseInt(toHrs.getValue()), Integer.parseInt(toMin.getValue())),
-							new Resource(r, s, l), controller.getCustomer(userName.getValue()));
-				} catch (Throwable e) {
+							new Resource(r, s, l))) {
+						controller.makeReservation(
 
+								LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
+										Integer.parseInt(fromHrs.getValue()), Integer.parseInt(fromMin.getValue())),
+								LocalDateTime.of(year, date.getValue().getMonth() + 1, day,
+										Integer.parseInt(toHrs.getValue()), Integer.parseInt(toMin.getValue())),
+								new Resource(r, s, l), controller.getCustomer(userName.getValue()));
+					}
+				} catch (Throwable e) {
 					e.printStackTrace();
 				}
 
@@ -181,12 +228,13 @@ public class MyUI extends UI {
 				table1.addContainerProperty("Endtime", String.class, null);
 				table1.addContainerProperty("Size", Integer.class, null);
 
-				Customer custom = controller.getCustomer(userName.getValue());
+				Customer custom;
 
 				Set<Reservation> reservations1 = null;
 				try {
+					custom = controller.getCustomer(userName.getValue());
 					reservations1 = controller.getReservationsMadeByCustomer(custom);
-				} catch (Exception e) {
+				} catch (Throwable e) {
 
 					e.printStackTrace();
 				}
@@ -201,10 +249,24 @@ public class MyUI extends UI {
 				addComponent(table1, 4, 5, 8, 5);
 			});
 
+			addRoom.addClickListener(ae -> {
+				try {
+					if ((roomField.isEmpty() || locationField.isEmpty()) == false) {
+						controller.addResource(roomField.getValue(), locationField.getValue(), roomSize);
+						table.addItem(new Object[] { roomField.getValue(), locationField.getValue(), roomSize }, count++);
+					}
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			});
+
 		}
 
 	}
 
+	/**
+	 * Method which actually creates the whole UI.
+	 */
 	@Override
 	protected void init(VaadinRequest vaadinRequest) {
 
@@ -222,17 +284,20 @@ public class MyUI extends UI {
 
 		Button login = new Button("Login");
 		register = new Button("Register");
+		CheckBox askBox = new CheckBox("Are you a Roommanager?");
 
 		login.setStyleName(Reindeer.BUTTON_SMALL);
 		login.setWidth("86px");
 
 		register.setStyleName(Reindeer.BUTTON_SMALL);
 		register.setWidth("86px");
+		askBox.setStyleName(Reindeer.BUTTON_SMALL);
 
 		HorizontalLayout hl = new HorizontalLayout();
 		hl.setSpacing(true);
 		hl.addComponent(login);
 		hl.addComponent(register);
+		hl.addComponent(askBox);
 
 		content.addComponent(hl);
 		content.setSizeUndefined();
@@ -241,18 +306,23 @@ public class MyUI extends UI {
 		panel.setContent(content);
 
 		login.addClickListener(e -> {
-			if ((controller.login(userName.getValue(), password.getValue()))
-					|| (userName.equals(userName.getValue()) && password.equals(password.getValue()))) {
-
-				setContent(new ReservationUI());
+			System.out.println(userName.getValue());
+			System.out.println(password.getValue());
+			try {
+				if (controller.login(userName.getValue(), password.getValue())
+						|| userName.equals(userName.getValue()) && password.equals(password.getValue())) {
+					setContent(new ReservationUI());
+				}
+			} catch (Throwable e1) {
+				e1.printStackTrace();
 			}
 		});
 
 		register.addClickListener(e -> {
 			try {
-				controller.register(userName.getValue(), password.getValue());
+				Role x = askBox.getValue() ? Role.ROOMMANAGER : Role.CUSTOMER;
+				controller.register(userName.getValue(), password.getValue(), x);
 			} catch (Throwable e1) {
-
 				e1.printStackTrace();
 			}
 		});
