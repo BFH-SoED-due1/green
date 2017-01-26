@@ -3,7 +3,7 @@
 		-------------
 		Eric Dubuis
 		-------------
-		December 4, 2016
+		December 4, 2016; updated January 25, 2017.
 
 
 Deliverable 4
@@ -130,6 +130,83 @@ hours) as soon as you'll have finished the first task.
 	<<100>> points at most per team member are attributed to this deliverable. Points may
 not be equally distributed among team members. (However, this is the goal.)
 
+*---------------------------------------------------------------+---------------*-----------------*
+| Item															| Max. points	| Points received |
+*---------------------------------------------------------------+---------------*-----------------*
+| Product backlog items at the beginning						| 		5 		| 		5 		  |
+| COMMENTS:\													| 				| 				  |
+| -	Good														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| The sprint backlog items / task list with task estimates	 	| 	 	10		| 		10 		  |
+| COMMENTS:\													| 				| 				  |
+| -	Good														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| The list of finished sprint backlog items / tasks and			| 		5		|   	5		  |
+| measurements of your efforts (in hours)\ 						| 				|   			  |
+| COMMENTS:\													| 				| 				  |
+| -	Good														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Stable structure in terms of Java packages respecting the		| 		10 		| 		8 		  |
+| SOLID design principles\ 										| 		 		| 		 		  |
+| COMMENTS:\													| 				| 				  |
+| - Not optimal: Fetching all entities at once (-1)\			| 				| 				  |
+| - No abstractions in terms of interfaces/abstract classes (-1) | 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Production Java interfaces and classes for logical			| 		10		| 		10 		  |
+| and persistence layer\										| 		 		| 		 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - Logical layer is missing (-1)								| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Production Java interfaces and classes for the user			| 		5 		| 		 5		  |
+| interface layer\												| 		 		| 		 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - Good														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| JUnit test classes for the core layers of the software,		| 		10 		| 		10 		  |
+| coverage: 90% (UI components excluded)\						| 		 		| 		 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - Good														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| The JDepend report\											| 		5		| 		5 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - Good														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| The Checkstyle report \										| 		5		| 		5 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - Good														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| JavaDoc quality \												| 		5		| 		1 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - Errors in JavaDoc generation (-2)\							| 				| 				  |
+| - Missing JavaDoc comments at many places (-2)				| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Running application, UI, functionality\						| 		20		| 		16 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - SQLite exception upon registering same user, but no UI feedback\ | 			| 				  |
+| - Vaadin exception (UI state then undefined)\					| 				| 				  |
+| - Functionality is okay, less UI design						| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Software (architecture) documentation\						| 		10		| 		 9		  |
+| COMMENTS:\													| 				| 			  	  |
+| - Package diagram: Text missing (-1) 							| 				| 				  |
+| - A-I graph: okay 											| 				| 				  |
+| - Rest: okay 													| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Miscellaneous 1\												| 				| 		 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - None														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Miscellaneous 2\												| 				| 		 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - None														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Miscellaneous 3\												| 				| 		 		  |
+| COMMENTS:\													| 				| 			  	  |
+| - None														| 				| 				  |
+*---------------------------------------------------------------+---------------*-----------------*
+| Total															| 		100		| 		89		  |
+*---------------------------------------------------------------+---------------*-----------------*
+Distribution of points for this deliverable.
 
 
 * Deadline
@@ -138,4 +215,3 @@ not be equally distributed among team members. (However, this is the goal.)
 
 	[Note:]	Deadline is Friday evening. However, you can provide
 			your deliverable till the following Sunday evening, 12 pm.
-			
